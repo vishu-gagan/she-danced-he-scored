@@ -5,3 +5,8 @@
 # Editor / tooling
 .vscode/
 .idea/
+
+# Claude 
+.claude/*.local.json
+.claude/**/*.local.json
+.claude/CLAUDE.local.md
