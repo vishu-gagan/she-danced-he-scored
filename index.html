@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gagan &amp; Vishu — Wedding Celebrations</title>
+<meta name="description" content="Interactive itinerary for Gagan &amp; Vishu's Punjab wedding and Goa reception, December 2026.">
+<script>
+(function(){
+  var t = null;
+  try { t = localStorage.getItem('gv-theme'); } catch(e){}
+  document.documentElement.setAttribute('data-theme', (t === 'light' || t === 'dark') ? t : 'light');
+  if(!document.querySelector('meta[name="viewport"]')){
+    var vp = document.createElement('meta');
+    vp.name = 'viewport';
+    vp.content = 'width=device-width, initial-scale=1.0';
+    (document.head || document.documentElement).appendChild(vp);
+  }
+})();
+</script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<canvas id="petalCanvas" aria-hidden="true"></canvas>
+
+<button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch between light and dark theme">
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 14.5A8.5 8.5 0 019.5 4 8.5 8.5 0 1020 14.5z"/></svg>
+</button>
+
+<div class="page">
+  <header class="hero" id="top">
+    <svg class="hero-motif" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <pattern id="motif" width="120" height="120" patternUnits="userSpaceOnUse">
+          <path d="M60 10 C80 30 80 50 60 70 C40 50 40 30 60 10Z" fill="none" stroke="var(--primary)" stroke-width="0.6" opacity="0.35"/>
+          <circle cx="60" cy="60" r="2" fill="var(--accent-soft)" opacity="0.4"/>
+        </pattern>
+      </defs>
+      <rect width="800" height="800" fill="url(#motif)"/>
+    </svg>
+    <div class="hero-content">
+      <div class="hero-duo">
+        <div class="hero-cluster">
+          <img class="cluster-photo cluster-a" src="images/3-trim.png" alt="Gagan kneeling to propose with a rose to Vishu">
+          <img class="cluster-photo cluster-b" src="images/4-trim.png" alt="Gagan and Vishu smiling together at their floral mehendi arch">
+          <img class="cluster-photo cluster-c" src="images/5-trim.png" alt="Gagan and Vishu in a warm embrace">
+        </div>
+      </div>
+      <p class="hashtag-top">#SheDancedHeScored</p>
+      <h1 class="couple-names">Gagan <span class="amp">&amp;</span> Vishu</h1>
+      <p class="date-range">4 – 7 December &nbsp;·&nbsp; 11 December 2026</p>
+      <p class="locations"><span>Punjab</span><span class="dot"></span><span>Goa</span></p>
+      <div class="countdown" id="countdown" aria-live="polite">
+        <div class="unit"><span class="num" id="cd-days">–</span><span class="lbl">Days</span></div>
+        <div class="unit"><span class="num" id="cd-hours">–</span><span class="lbl">Hrs</span></div>
+        <div class="unit"><span class="num" id="cd-mins">–</span><span class="lbl">Min</span></div>
+        <div class="unit"><span class="num" id="cd-secs">–</span><span class="lbl">Sec</span></div>
+      </div>
+      <div class="hero-actions">
+        <button class="btn primary" id="petalsBtn" type="button">Shower petals</button>
+        <button class="btn" id="icsAllBtn" type="button">Add itinerary to calendar</button>
+      </div>
+      <a class="scroll-cue" href="#venues"><span>Begin the celebration</span><span class="chev"></span></a>
+    </div>
+  </header>
+
+  <nav class="day-nav" aria-label="Jump to day">
+    <div class="day-nav-inner" id="dayNavInner">
+      <button data-target="#venues">Getting there</button>
+      <button data-target="#day1">Fri 4 · Mehendi &amp; Sangeet</button>
+      <button data-target="#day2">Sat 5 · Haldi &amp; Pheras</button>
+      <button data-target="#day3">Sun 6 · Gurudwara &amp; Reception</button>
+      <button data-target="#day4">Mon 7 · Farewell</button>
+      <button data-target="#day5">Fri 11 · Goa</button>
+      <button data-target="#dresscode">Dress code</button>
+      <button data-target="#rsvp">RSVP</button>
+    </div>
+  </nav>
+
+  <main>
+    <section id="venues" class="section">
+      <p class="eyebrow">Where it's happening</p>
+      <h2>Two states, one celebration</h2>
+      <p class="section-lead">A Punjabi wedding week in the fields of Punjab, and a Goan sunset reception by the sea.</p>
+      <div class="venue-grid">
+        <article class="venue-card punjab">
+          <span class="venue-tag">4 – 7 December</span>
+          <h3 class="venue-name">Firangi Pani Resort</h3>
+          <p class="venue-loc">Kairpur Sheikan, Punjab</p>
+          <div class="travel-rows">
+            <div class="travel-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 16l20-8-8 20-2-8-8-2z"/></svg>
+              <span><b>Mohali Intl. Airport</b> (Chandigarh) — 41.6 km, ~50 min by taxi/Uber</span>
+            </div>
+            <div class="travel-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="4" width="14" height="13" rx="3"/><path d="M5 13h14M9 21l-2-4h10l-2 4M8 8h8"/></svg>
+              <span><b>Chandigarh Railway Station</b> — 45 km, ~1 hr by taxi/Uber</span>
+            </div>
+          </div>
+          <p class="venue-note">All guests stay at the resort — every function happens on the property unless noted.</p>
+          <a class="map-link" href="https://maps.app.goo.gl/4WE8b8ffaLZf8VpFA" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-5.3-7-11a7 7 0 0114 0c0 5.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            View on Google Maps
+          </a>
+        </article>
+        <article class="venue-card goa">
+          <span class="venue-tag">11 December</span>
+          <h3 class="venue-name">Mar Vista Beach House</h3>
+          <p class="venue-loc">CopelWaddo, Sernabatim, Goa 403708</p>
+          <p class="venue-note" style="margin-top:1.1rem;">A sunset send-off by the Arabian Sea — pastels, sea breeze, and one last dance floor.</p>
+          <a class="map-link" href="https://maps.app.goo.gl/1qraVx649sPZk7Wv9" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-5.3-7-11a7 7 0 0114 0c0 5.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            View on Google Maps
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section id="day1" class="day-section punjab-tex">
+      <div class="day-head">
+        <div class="day-head-text"><span class="day-date">Friday</span><h2>4th December 2026</h2></div>
+        <button class="ics-btn" data-day="1" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 14v4M10 16h4"/></svg>
+          Add to calendar
+        </button>
+      </div>
+      <ol class="timeline">
+        <li class="event">
+          <span class="time-label">Morning</span>
+          <div class="event-body"><h3>Guest check-in</h3><p class="sub">Arrive whenever suits you — the resort welcomes you all morning.</p></div>
+        </li>
+        <li class="event">
+          <time>10–12 PM</time>
+          <div class="event-body"><h3>Welcome snacks &amp; refreshments</h3></div>
+        </li>
+        <li class="event highlight">
+          <time>11:00 AM</time>
+          <div class="event-body">
+            <span class="event-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21c-4-3-7-6.5-7-10a7 7 0 0114 0c0 3.5-3 7-7 10z"/></svg></span>
+            <h3>Mehendi ceremony</h3>
+            <ul>
+              <li>Mehendi artists for every guest</li>
+              <li>Family &amp; friends photoshoots</li>
+              <li>Music and celebration</li>
+            </ul>
+            <div class="dress-chip pink-orange"><span class="swirl"></span>Pink &amp; orange florals · any Indian wear</div>
+          </div>
+        </li>
+        <li class="event">
+          <time>1:00 PM</time>
+          <div class="event-body"><h3>Lunch</h3></div>
+        </li>
+        <li class="event highlight">
+          <time>7:00 PM</time>
+          <div class="event-body">
+            <span class="event-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>
+            <h3>Jaggo &amp; Sangeet night</h3>
+            <ul>
+              <li>DJ &amp; music</li>
+              <li>Dance performances</li>
+              <li>Family entertainment</li>
+            </ul>
+            <p class="sub">Dinner follows the performances.</p>
+            <div class="dress-chip lavender"><span class="swirl"></span>Purple &amp; lavender · Punjabi attire</div>
+            <details class="dresscode-detail">
+              <summary>Full dress code</summary>
+              <div class="dd-body">
+                <b>Girls</b> — Punjabi suit, sharara, garara, parandi (encouraged)<br>
+                <b>Boys</b> — kurta pajama, turban (optional)
+              </div>
+            </details>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="day2" class="day-section punjab-tex">
+      <div class="day-head">
+        <div class="day-head-text"><span class="day-date">Saturday</span><h2>5th December 2026</h2></div>
+        <button class="ics-btn" data-day="2" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 14v4M10 16h4"/></svg>
+          Add to calendar
+        </button>
+      </div>
+      <ol class="timeline">
+        <li class="event">
+          <time>8:00 AM</time>
+          <div class="event-body"><h3>Breakfast</h3><p class="sub">For all guests staying at the resort.</p></div>
+        </li>
+        <li class="event highlight">
+          <time>10:00 AM</time>
+          <div class="event-body">
+            <span class="event-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 12c0-4 3-8 8-8s8 4 8 8-3 8-8 8-8-4-8-8z"/><path d="M8 12h8M12 8v8"/></svg></span>
+            <h3>Haldi ceremony</h3>
+            <ul>
+              <li>Traditional haldi ceremony</li>
+              <li>Hindu rituals and pooja</li>
+              <li>Family photoshoots</li>
+              <li>Music (no DJ)</li>
+            </ul>
+            <div class="dress-chip redblue"><span class="swirl"></span>Floral red &amp; blue · any Indian wear</div>
+          </div>
+        </li>
+        <li class="event">
+          <time>1:00 PM</time>
+          <div class="event-body"><h3>Lunch</h3></div>
+        </li>
+        <li class="event highlight">
+          <time>5:00 PM</time>
+          <div class="event-body">
+            <span class="event-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s7-5.5 7-11a7 7 0 00-14 0c0 5.5 7 11 7 11z"/><path d="M12 17c-2-2-3-4-3-6a3 3 0 016 0c0 2-1 4-3 6z"/></svg></span>
+            <h3>Hindu wedding ceremony (Pheras)</h3>
+            <div class="dress-chip anycolor"><span class="swirl"></span>Any colour</div>
+            <details class="dresscode-detail">
+              <summary>Full dress code</summary>
+              <div class="dd-body"><b>Girls</b> — saree &nbsp;·&nbsp; <b>Boys</b> — kurta</div>
+            </details>
+          </div>
+        </li>
+        <li class="event">
+          <time>8:00 PM</time>
+          <div class="event-body"><h3>Dinner</h3></div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="day3" class="day-section punjab-tex">
+      <div class="day-head">
+        <div class="day-head-text"><span class="day-date">Sunday</span><h2>6th December 2026</h2></div>
+        <button class="ics-btn" data-day="3" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 14v4M10 16h4"/></svg>
+          Add to calendar
+        </button>
+      </div>
+      <ol class="timeline">
+        <li class="event">
+          <time>7:00 AM</time>
+          <div class="event-body"><h3>Early breakfast</h3></div>
+        </li>
+        <li class="event highlight">
+          <time>9:00 AM</time>
+          <div class="event-body">
+            <span class="event-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v18M6 8c0 3 2.5 5 6 5s6-2 6-5"/></svg></span>
+            <h3>Gurudwara ceremony (Lava ceremony)</h3>
+            <div class="dress-chip anycolor"><span class="swirl"></span>Any colour · modest Indian wear</div>
+            <p class="sub">Please ensure your head and body are appropriately covered while attending the Gurudwara.</p>
+          </div>
+        </li>
+        <li class="event highlight">
+          <time>1:00 PM</time>
+          <div class="event-body">
+            <span class="event-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg></span>
+            <h3>Punjab reception</h3>
+            <ul>
+              <li>Bride &amp; groom entry</li>
+              <li>DJ &amp; dhol</li>
+              <li>Dance performances</li>
+              <li>Lunch &amp; evening snacks</li>
+            </ul>
+            <div class="dress-chip pastel"><span class="swirl"></span>Pastel colours · any Indian wear</div>
+          </div>
+        </li>
+        <li class="event highlight">
+          <time>6:00 PM</time>
+          <div class="event-body">
+            <span class="event-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 4c-3 3-3 6 0 9 3-3 3-6 0-9zM12 13v7"/></svg></span>
+            <h3>Bidaai</h3>
+            <p class="sub">Followed by traditional rituals at the groom's residence. Guests from the bride's side staying overnight may check out on 7th December.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="day4" class="day-section punjab-tex">
+      <div class="day-head">
+        <div class="day-head-text"><span class="day-date">Monday</span><h2>7th December 2026</h2></div>
+      </div>
+      <ol class="timeline">
+        <li class="event">
+          <span class="time-label">Morning</span>
+          <div class="event-body"><h3>Breakfast &amp; final check-out</h3><p class="sub">For all guests staying at the resort.</p></div>
+        </li>
+        <li class="event highlight">
+          <span class="time-label">Lunch</span>
+          <div class="event-body">
+            <h3>Family lunch</h3>
+            <p class="sub">The bride's side family and friends are invited. Wish to explore Chandigarh? Extend your stay — those travelling back can join lunch before departure.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="day5" class="day-section goa-tex">
+      <div class="day-head">
+        <div class="day-head-text"><span class="day-date">Friday</span><h2>11th December 2026 · Goa</h2></div>
+        <button class="ics-btn" data-day="5" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 14v4M10 16h4"/></svg>
+          Add to calendar
+        </button>
+      </div>
+      <ol class="timeline">
+        <li class="event highlight">
+          <time>5:30 PM</time>
+          <div class="event-body">
+            <span class="event-icon" style="background:color-mix(in srgb, var(--secondary) 16%, transparent);color:var(--secondary-deep);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="5"/><path d="M2 19h20M4 15h16"/></svg>
+            </span>
+            <h3>Goa wedding reception</h3>
+            <ul>
+              <li>Bride's sunset entry</li>
+              <li>Tea, coffee &amp; snacks</li>
+              <li>Dance performances &amp; DJ</li>
+              <li>Dinner, entertainment &amp; celebration</li>
+            </ul>
+            <div class="dress-chip pastel"><span class="swirl"></span>Pastel colours · party wear</div>
+            <p class="sub">Mar Vista Beach House, CopelWaddo, Sernabatim, Goa 403708</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="dresscode" class="section">
+      <p class="eyebrow">Quick reference</p>
+      <h2>Dress code, at a glance</h2>
+      <p class="section-lead">Seven functions, seven palettes — a snapshot before you pack.</p>
+      <div class="swatch-grid">
+        <div class="swatch-card">
+          <span class="swatch" style="background:linear-gradient(135deg,var(--primary),#F0BE8E);"></span>
+          <span class="sc-date">4 Dec · Mehendi</span>
+          <span class="sc-title">Pink &amp; orange</span>
+          <span class="sc-note">Any Indian wear</span>
+        </div>
+        <div class="swatch-card">
+          <span class="swatch" style="background:linear-gradient(135deg,var(--lavender),#E2D3F0);"></span>
+          <span class="sc-date">4 Dec · Sangeet</span>
+          <span class="sc-title">Purple &amp; lavender</span>
+          <span class="sc-note">Punjabi theme</span>
+        </div>
+        <div class="swatch-card">
+          <span class="swatch" style="background:linear-gradient(135deg,var(--accent-pop),var(--secondary));"></span>
+          <span class="sc-date">5 Dec · Haldi</span>
+          <span class="sc-title">Red &amp; blue florals</span>
+          <span class="sc-note">Any Indian wear</span>
+        </div>
+        <div class="swatch-card">
+          <span class="swatch" style="background:conic-gradient(var(--primary),var(--accent-pop),var(--secondary),var(--lavender),var(--primary));"></span>
+          <span class="sc-date">5 Dec · Pheras</span>
+          <span class="sc-title">Any colour</span>
+          <span class="sc-note">Saree / kurta</span>
+        </div>
+        <div class="swatch-card">
+          <span class="swatch" style="background:linear-gradient(135deg,#F2ECE6,#D6C9BD);"></span>
+          <span class="sc-date">6 Dec · Gurudwara</span>
+          <span class="sc-title">Any colour</span>
+          <span class="sc-note">Modest, head covered</span>
+        </div>
+        <div class="swatch-card">
+          <span class="swatch" style="background:linear-gradient(135deg,var(--accent-soft),var(--primary),var(--secondary));"></span>
+          <span class="sc-date">6 Dec · Punjab reception</span>
+          <span class="sc-title">Pastels</span>
+          <span class="sc-note">Any Indian wear</span>
+        </div>
+        <div class="swatch-card">
+          <span class="swatch" style="background:linear-gradient(135deg,var(--secondary),var(--accent-soft),var(--primary));"></span>
+          <span class="sc-date">11 Dec · Goa</span>
+          <span class="sc-title">Pastels</span>
+          <span class="sc-note">Party wear</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="eyebrow">Good to know</p>
+      <h2>A few extra notes</h2>
+      <div class="extras-grid" style="margin-top:2rem;">
+        <article class="extra-card">
+          <h3>Makeup &amp; styling (Punjab)</h3>
+          <p>Makeup artists and saree-draping contacts will be shared on WhatsApp — book directly with them. Keen on a parandi? Let us know in advance so one can be arranged.</p>
+        </article>
+        <article class="extra-card">
+          <h3>Dance performances</h3>
+          <p>A WhatsApp group is forming for anyone dancing in Punjab or Goa. Join in to coordinate rehearsals and run-throughs with the choreographers.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="rsvp" class="section rsvp-section">
+      <p class="eyebrow">Kindly respond</p>
+      <h2>RSVP</h2>
+      <div class="rsvp-card">
+        <p>If this itinerary reached you, you're already invited — with love, no separate card is coming. Please confirm your attendance at your earliest convenience.</p>
+        <ul class="rsvp-list">
+          <li>Resort room bookings</li>
+          <li>Transportation planning</li>
+          <li>Catering arrangements</li>
+          <li>Event logistics</li>
+        </ul>
+        <p class="rsvp-note">Coming from Goa to Punjab? We'll share the preferred mode of travel once group numbers are finalised.</p>
+      </div>
+
+      <form class="rsvp-form" id="rsvpForm" novalidate>
+        <div class="form-grid">
+          <label class="form-field">
+            <span>Name</span>
+            <input type="text" name="name" autocomplete="name" required>
+          </label>
+          <label class="form-field">
+            <span>Contact number</span>
+            <input type="tel" name="contact" autocomplete="tel" required>
+          </label>
+        </div>
+
+        <fieldset class="form-field form-field-full radio-fieldset">
+          <legend>Will you be joining us?</legend>
+          <div class="radio-row">
+            <label class="radio-pill"><input type="radio" name="response" value="Yes" required><span>Yes</span></label>
+            <label class="radio-pill"><input type="radio" name="response" value="No"><span>No</span></label>
+          </div>
+        </fieldset>
+
+        <div class="rsvp-yes-fields" id="rsvpYesFields" hidden>
+          <div class="form-grid">
+            <label class="form-field">
+              <span>Number of guests from your family</span>
+              <input type="number" name="numGuests" min="1" step="1">
+            </label>
+            <label class="form-field">
+              <span>Number of nights staying</span>
+              <input type="number" name="numNights" min="0" step="1">
+            </label>
+          </div>
+          <label class="form-field form-field-full">
+            <span>Names &amp; ages of all guests</span>
+            <textarea name="guestDetails" rows="2" placeholder="e.g. Aman Singh (34), Simran Kaur (30), Aryan (6)"></textarea>
+          </label>
+          <div class="form-grid">
+            <label class="form-field">
+              <span>Arrival date</span>
+              <input type="date" name="arrivalDate">
+            </label>
+            <label class="form-field">
+              <span>Departure date</span>
+              <input type="date" name="departureDate">
+            </label>
+          </div>
+          <div class="form-grid">
+            <label class="form-field">
+              <span>Mode of travel</span>
+              <select name="travelMode" id="travelMode">
+                <option value="">Select one</option>
+                <option value="Flight">Flight</option>
+                <option value="Train">Train</option>
+                <option value="Car">Car</option>
+              </select>
+            </label>
+            <label class="form-field" id="travelNumberField">
+              <span>Flight / train number</span>
+              <input type="text" name="travelNumber" placeholder="e.g. 6E 204">
+            </label>
+          </div>
+          <div class="form-grid">
+            <label class="form-field">
+              <span>Food preference</span>
+              <select name="foodPreference">
+                <option value="">Select one</option>
+                <option>Vegetarian</option>
+                <option>Non-vegetarian</option>
+                <option>Vegan</option>
+                <option>Jain</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+          <label class="form-field form-field-full">
+            <span>Any special requirements</span>
+            <textarea name="specialRequirements" rows="2" placeholder="Allergies, accessibility needs, anything else we should know"></textarea>
+          </label>
+        </div>
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn primary" id="rsvpSubmit">Send RSVP</button>
+          <p class="form-status" id="rsvpStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+
+    <section class="section note-section" style="border-bottom:none;">
+      <div class="note-photo-frame">
+        <img src="images/2-trim.png" alt="Gagan and Vishu celebrating with arms raised at their floral mehendi arch, in a heart frame">
+      </div>
+      <blockquote>
+        "This is not just a wedding — it is an opportunity for all of us to come together, celebrate, laugh, dance, and create unforgettable memories. A beautiful blend of Punjabi and Goan traditions awaits, and we truly hope you will be part of it."
+        <span class="cite">Gagan &amp; Vishu</span>
+      </blockquote>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer-names">Gagan <span class="amp">&amp;</span> Vishu</p>
+    <p>With love ❤️</p>
+    <p class="footer-hash">#SheDancedHeScored</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // theme toggle
+  var root = document.documentElement;
+  var themeToggle = document.getElementById('themeToggle');
+  var savedTheme = null;
+  try { savedTheme = localStorage.getItem('gv-theme'); } catch(e) {}
+  root.setAttribute('data-theme', (savedTheme === 'light' || savedTheme === 'dark') ? savedTheme : 'light');
+  themeToggle.addEventListener('click', function(){
+    var current = root.getAttribute('data-theme') || 'light';
+    var next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('gv-theme', next); } catch(e) {}
+  });
+
+  // RSVP form
+  var RSVP_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbyhtM-hGW_3m74-krKft3UoYdVApVH0lGrjh3Sgc3PUCvLe5b1xYWHDQbH9p9f_6R1jzg/exec';
+  var rsvpForm = document.getElementById('rsvpForm');
+  var rsvpYesFields = document.getElementById('rsvpYesFields');
+  var travelNumberField = document.getElementById('travelNumberField');
+  var travelModeSelect = document.getElementById('travelMode');
+  var rsvpStatus = document.getElementById('rsvpStatus');
+  var rsvpSubmit = document.getElementById('rsvpSubmit');
+
+  function updateYesFieldsVisibility(){
+    var checked = rsvpForm.querySelector('input[name="response"]:checked');
+    var isYes = checked && checked.value === 'Yes';
+    rsvpYesFields.hidden = !isYes;
+    Array.prototype.forEach.call(rsvpYesFields.querySelectorAll('input,select,textarea'), function(el){
+      el.disabled = !isYes;
+    });
+  }
+  Array.prototype.forEach.call(rsvpForm.querySelectorAll('input[name="response"]'), function(radio){
+    radio.addEventListener('change', updateYesFieldsVisibility);
+  });
+
+  function updateTravelNumberVisibility(){
+    travelNumberField.style.display = (travelModeSelect.value === 'Car') ? 'none' : '';
+  }
+  travelModeSelect.addEventListener('change', updateTravelNumberVisibility);
+
+  rsvpForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!rsvpForm.checkValidity()){
+      rsvpForm.reportValidity();
+      return;
+    }
+    var fd = new FormData(rsvpForm);
+    var data = {};
+    fd.forEach(function(value, key){ data[key] = value; });
+    data.submittedAt = new Date().toISOString();
+
+    if(RSVP_ENDPOINT_URL.indexOf('PASTE_YOUR') === 0){
+      rsvpStatus.textContent = 'RSVP form is not yet connected to a sheet — see setup instructions.';
+      rsvpStatus.className = 'form-status error';
+      return;
+    }
+
+    rsvpSubmit.disabled = true;
+    rsvpStatus.textContent = 'Sending your RSVP…';
+    rsvpStatus.className = 'form-status';
+
+    fetch(RSVP_ENDPOINT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: JSON.stringify(data)
+    }).then(function(){
+      rsvpStatus.textContent = 'Thank you! Your RSVP has been received.';
+      rsvpStatus.className = 'form-status success';
+      rsvpForm.reset();
+      updateYesFieldsVisibility();
+      rsvpSubmit.disabled = false;
+    }).catch(function(){
+      rsvpStatus.textContent = 'Something went wrong sending your RSVP. Please check your connection and try again.';
+      rsvpStatus.className = 'form-status error';
+      rsvpSubmit.disabled = false;
+    });
+  });
+
+  // progress bar
+  var bar = document.getElementById('progressBar');
+  function updateProgress(){
+    var h = document.documentElement;
+    var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = (scrolled || 0) + '%';
+  }
+  document.addEventListener('scroll', updateProgress, {passive:true});
+  updateProgress();
+
+  // countdown to 4 Dec 2026, 00:00 IST
+  var target = new Date('2026-12-04T00:00:00+05:30').getTime();
+  function tick(){
+    var now = Date.now();
+    var diff = Math.max(0, target - now);
+    var d = Math.floor(diff/86400000);
+    var h = Math.floor(diff/3600000)%24;
+    var m = Math.floor(diff/60000)%60;
+    var s = Math.floor(diff/1000)%60;
+    document.getElementById('cd-days').textContent = d;
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // day nav: smooth scroll + active state
+  var navButtons = Array.prototype.slice.call(document.querySelectorAll('.day-nav button'));
+  navButtons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.querySelector(btn.getAttribute('data-target'));
+      if(el){ el.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'start'}); }
+    });
+  });
+  var sections = navButtons.map(function(btn){ return document.querySelector(btn.getAttribute('data-target')); }).filter(Boolean);
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var idx = sections.indexOf(entry.target);
+        if(idx === -1) return;
+        if(entry.isIntersecting){
+          navButtons.forEach(function(b){ b.classList.remove('active'); });
+          navButtons[idx].classList.add('active');
+          var navInner = document.getElementById('dayNavInner');
+          var btn = navButtons[idx];
+          var targetLeft = btn.offsetLeft - (navInner.clientWidth - btn.offsetWidth) / 2;
+          navInner.scrollTo({left: Math.max(0, targetLeft), behavior: 'auto'});
+        }
+      });
+    }, {rootMargin:'-40% 0px -50% 0px'});
+    sections.forEach(function(s){ obs.observe(s); });
+  }
+
+  // scroll cue anchor smooth scroll
+  document.querySelectorAll('a.scroll-cue').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var el = document.querySelector(a.getAttribute('href'));
+      if(el){ el.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth'}); }
+    });
+  });
+
+  // ICS generation
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function fmt(dt){
+    return dt.y + pad(dt.mo) + pad(dt.d) + 'T' + pad(dt.h) + pad(dt.mi) + '00';
+  }
+  var allEvents = [
+    {day:1, y:2026,mo:12,d:4,h:10,mi:0,dur:2, title:'Welcome Snacks & Refreshments', loc:'Firangi Pani Resort, Punjab'},
+    {day:1, y:2026,mo:12,d:4,h:11,mi:0,dur:2, title:'Mehendi Ceremony', loc:'Firangi Pani Resort, Punjab'},
+    {day:1, y:2026,mo:12,d:4,h:19,mi:0,dur:3, title:'Jaggo & Sangeet Night', loc:'Firangi Pani Resort, Punjab'},
+    {day:2, y:2026,mo:12,d:5,h:10,mi:0,dur:2, title:'Haldi Ceremony', loc:'Firangi Pani Resort, Punjab'},
+    {day:2, y:2026,mo:12,d:5,h:17,mi:0,dur:2, title:'Hindu Wedding Ceremony (Pheras)', loc:'Firangi Pani Resort, Punjab'},
+    {day:3, y:2026,mo:12,d:6,h:9,mi:0,dur:2, title:'Gurudwara Ceremony (Lava Ceremony)', loc:'Punjab'},
+    {day:3, y:2026,mo:12,d:6,h:13,mi:0,dur:3, title:'Punjab Reception', loc:'Firangi Pani Resort, Punjab'},
+    {day:3, y:2026,mo:12,d:6,h:18,mi:0,dur:1, title:'Bidaai', loc:'Firangi Pani Resort, Punjab'},
+    {day:4, y:2026,mo:12,d:7,h:13,mi:0,dur:2, title:'Family Lunch', loc:'Firangi Pani Resort, Punjab'},
+    {day:5, y:2026,mo:12,d:11,h:17,mi:30,dur:4, title:'Goa Wedding Reception', loc:'Mar Vista Beach House, Sernabatim, Goa'}
+  ];
+  function buildIcs(events){
+    var lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Gagan and Vishu//Wedding//EN','CALSCALE:GREGORIAN'];
+    events.forEach(function(e, i){
+      var start = {y:e.y,mo:e.mo,d:e.d,h:e.h,mi:e.mi};
+      var endHour = e.h + e.dur;
+      var end = {y:e.y,mo:e.mo,d:e.d,h:endHour % 24,mi:e.mi};
+      lines.push('BEGIN:VEVENT');
+      lines.push('UID:gv-wedding-' + e.day + '-' + i + '@shedancedhescored');
+      lines.push('DTSTART:' + fmt(start));
+      lines.push('DTEND:' + fmt(end));
+      lines.push('SUMMARY:' + e.title + ' — Gagan & Vishu');
+      lines.push('LOCATION:' + e.loc);
+      lines.push('DESCRIPTION:Time shown is local (IST). See the wedding site for full details.');
+      lines.push('END:VEVENT');
+    });
+    lines.push('END:VCALENDAR');
+    return lines.join('\r\n');
+  }
+  function downloadIcs(content, filename){
+    var blob = new Blob([content], {type:'text/calendar;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  }
+  document.querySelectorAll('.ics-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var day = btn.getAttribute('data-day');
+      var evs = allEvents.filter(function(e){ return String(e.day) === day; });
+      downloadIcs(buildIcs(evs), 'gagan-vishu-day' + day + '.ics');
+    });
+  });
+  document.getElementById('icsAllBtn').addEventListener('click', function(){
+    downloadIcs(buildIcs(allEvents), 'gagan-vishu-wedding-itinerary.ics');
+  });
+
+  // petal shower
+  var canvas = document.getElementById('petalCanvas');
+  var ctx = canvas.getContext('2d');
+  function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resize); resize();
+  var petals = [];
+  var colors = ['#F1A8CA','#C42B38','#71A5C8','#B1A6C9'];
+  function spawnPetals(){
+    if(reduceMotion) return;
+    for(var i=0;i<60;i++){
+      petals.push({
+        x: Math.random()*canvas.width,
+        y: -20 - Math.random()*200,
+        r: 4 + Math.random()*5,
+        vy: 1 + Math.random()*2,
+        vx: (Math.random()-0.5)*1.5,
+        rot: Math.random()*Math.PI*2,
+        vr: (Math.random()-0.5)*0.1,
+        color: colors[Math.floor(Math.random()*colors.length)],
+        life: 0
+      });
+    }
+    requestAnimationFrame(animate);
+  }
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    petals.forEach(function(p){
+      p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life++;
+      ctx.save();
+      ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.color; ctx.globalAlpha = Math.max(0, 1 - p.life/400);
+      ctx.beginPath();
+      ctx.ellipse(0,0,p.r,p.r*0.6,0,0,Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    });
+    petals = petals.filter(function(p){ return p.y < canvas.height + 40 && p.life < 400; });
+    if(petals.length > 0){ requestAnimationFrame(animate); }
+    else { ctx.clearRect(0,0,canvas.width,canvas.height); }
+  }
+  document.getElementById('petalsBtn').addEventListener('click', spawnPetals);
+})();
+</script>
+</body>
+</html>
