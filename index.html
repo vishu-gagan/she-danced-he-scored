@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gagan &amp; Vishu — Wedding Celebrations</title>
+<title>Vishu &amp; Gagan — Wedding Celebrations</title>
 <meta name="description" content="Interactive itinerary for Gagan &amp; Vishu's Punjab wedding and Goa reception, December 2026.">
 <script>
 (function(){
@@ -18,9 +18,148 @@
   }
 })();
 </script>
+<script>
+/* Decide — before first paint — whether the opening animation plays.
+   Plays once per browser session; skipped on reduced-motion.
+   Force with ?intro in the URL, disable with ?nointro. */
+(function(){
+  try{
+    var s = location.search;
+    var force = /[?&]intro(=|&|$)/.test(s);
+    var off = /[?&]nointro(=|&|$)/.test(s);
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var seen = false; try{ seen = sessionStorage.getItem('gv-intro-seen')==='1'; }catch(e){}
+    if(force || (!off && !reduce && !seen)){
+      document.documentElement.classList.add('intro-playing');
+    }
+  }catch(e){}
+})();
+</script>
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="intro.css">
 </head>
 <body>
+
+<!-- ===== Cinematic opening: unsealing the invitation ===== -->
+<div class="intro" id="intro" role="dialog" aria-label="Opening the invitation">
+  <canvas class="intro-dust" id="introDust" aria-hidden="true"></canvas>
+  <div class="intro-vignette" aria-hidden="true"></div>
+  <button class="intro-skip" id="introSkip" type="button">Skip <span>&#9656;</span></button>
+
+  <div class="intro-camera">
+    <div class="intro-stage" id="introStage">
+      <div class="env" id="env">
+        <div class="env-shadow" aria-hidden="true"></div>
+        <div class="env-back" aria-hidden="true"></div>
+
+        <div class="card" id="card">
+          <svg class="card-floral tl" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+            <path d="M14 86 C22 60 40 44 70 34"/>
+            <path d="M70 34 C60 33 52 28 50 18 C60 20 68 26 70 34Z" fill="currentColor" stroke="none" opacity=".9"/>
+            <path d="M50 55 C44 52 40 46 40 38 C48 41 52 47 52 55Z" fill="currentColor" stroke="none" opacity=".85"/>
+            <path d="M34 70 C28 68 24 62 25 55 C32 58 35 64 35 70Z" fill="currentColor" stroke="none" opacity=".8"/>
+            <circle cx="76" cy="30" r="2.4" fill="currentColor" stroke="none"/>
+          </svg>
+          <svg class="card-floral tr" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><use href="#cf"/></svg>
+          <svg class="card-floral bl" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><use href="#cf"/></svg>
+          <svg class="card-floral br" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><use href="#cf"/></svg>
+
+          <p class="card-mono">&#10022;</p>
+          <p class="card-eyebrow">Together with their families</p>
+          <h1 class="card-names">Vishu <span class="amp">&amp;</span> Gagan</h1>
+          <p class="card-date">4 &ndash; 7 December &nbsp;&middot;&nbsp; 11 December 2026</p>
+          <p class="card-loc">Punjab &middot; Goa</p>
+        </div>
+
+        <div class="env-front" aria-hidden="true">
+          <span class="gold-edge"></span>
+          <svg class="env-wreath" viewBox="0 0 200 100" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <path d="M100 92 C78 80 52 58 38 18"/>
+            <path d="M100 92 C122 80 148 58 162 18"/>
+            <path d="M82 70 C90 66 96 58 94 50 C86 52 80 60 80 68Z" fill="currentColor" stroke="none" opacity=".82"/>
+            <path d="M64 48 C72 44 78 36 76 28 C68 30 62 38 62 46Z" fill="currentColor" stroke="none" opacity=".78"/>
+            <path d="M46 28 C54 24 59 17 57 10 C49 12 44 19 44 26Z" fill="currentColor" stroke="none" opacity=".74"/>
+            <path d="M118 70 C110 66 104 58 106 50 C114 52 120 60 120 68Z" fill="currentColor" stroke="none" opacity=".82"/>
+            <path d="M136 48 C128 44 122 36 124 28 C132 30 138 38 138 46Z" fill="currentColor" stroke="none" opacity=".78"/>
+            <path d="M154 28 C146 24 141 17 143 10 C151 12 156 19 156 26Z" fill="currentColor" stroke="none" opacity=".74"/>
+            <circle cx="100" cy="90" r="1.8" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+
+        <!-- flap + wax seal share one hinge, so the seal lifts intact with the flap -->
+        <div class="env-flap" id="flap" aria-hidden="true">
+          <div class="flap-rot">
+            <div class="flap-face out"></div>
+            <div class="flap-face in">
+              <svg class="liner" viewBox="0 0 240 130" preserveAspectRatio="xMidYMin slice" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
+                <path d="M20 26 C60 40 90 40 120 30 C150 40 180 40 220 26"/>
+                <path d="M64 34 C60 28 60 22 64 17 M64 34 C68 28 68 22 64 17"/>
+                <path d="M120 30 C116 23 116 17 120 12 M120 30 C124 23 124 17 120 12"/>
+                <path d="M176 34 C172 28 172 22 176 17 M176 34 C180 28 180 22 176 17"/>
+                <use href="#cf" transform="translate(105,-2) scale(.32)" opacity=".75"/>
+                <use href="#cf" transform="translate(46,10) scale(-.24,.24)" opacity=".55"/>
+                <use href="#cf" transform="translate(194,10) scale(.24)" opacity=".55"/>
+              </svg>
+            </div>
+            <div class="seal" id="seal" aria-hidden="true">
+              <img src="images/seal-trim.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="intro-hint" id="introHint">Tap to skip</p>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <g id="cf">
+    <path d="M14 86 C22 60 40 44 70 34"/>
+    <path d="M70 34 C60 33 52 28 50 18 C60 20 68 26 70 34Z" fill="currentColor" stroke="none" opacity=".9"/>
+    <path d="M50 55 C44 52 40 46 40 38 C48 41 52 47 52 55Z" fill="currentColor" stroke="none" opacity=".85"/>
+    <path d="M34 70 C28 68 24 62 25 55 C32 58 35 64 35 70Z" fill="currentColor" stroke="none" opacity=".8"/>
+    <circle cx="76" cy="30" r="2.4" fill="currentColor" stroke="none"/>
+  </g>
+  <g id="floral-corner" fill="none" stroke="currentColor" stroke-linecap="round">
+    <path d="M12 12 C55 32 92 64 126 116" stroke-width="1.8"/>
+    <path d="M12 12 C46 20 82 22 122 18" stroke-width="1.5"/>
+    <path d="M12 12 C20 46 22 82 18 122" stroke-width="1.5"/>
+    <path d="M44 34 C34 30 28 20 30 8 C42 12 48 22 48 34 Z" fill="currentColor" stroke="none" opacity=".82"/>
+    <path d="M70 58 C61 53 56 43 58 32 C68 38 72 48 70 58 Z" fill="currentColor" stroke="none" opacity=".78"/>
+    <path d="M96 86 C88 79 85 68 89 58 C98 66 100 77 96 86 Z" fill="currentColor" stroke="none" opacity=".74"/>
+    <path d="M56 18 C54 9 57 3 66 0 C68 8 65 15 58 20 Z" fill="currentColor" stroke="none" opacity=".7"/>
+    <path d="M86 16 C84 8 88 2 96 0 C98 8 94 14 88 18 Z" fill="currentColor" stroke="none" opacity=".68"/>
+    <path d="M18 56 C9 54 3 57 0 66 C8 68 15 65 20 58 Z" fill="currentColor" stroke="none" opacity=".7"/>
+    <path d="M16 86 C8 84 2 88 0 96 C8 98 14 94 18 88 Z" fill="currentColor" stroke="none" opacity=".68"/>
+    <circle cx="128" cy="20" r="2" fill="currentColor" stroke="none" opacity=".7"/>
+    <circle cx="20" cy="128" r="2" fill="currentColor" stroke="none" opacity=".7"/>
+    <g transform="translate(126,116)" fill="var(--ground)" stroke="currentColor" stroke-width="1.3" opacity=".95">
+      <ellipse cx="0" cy="-8" rx="4.4" ry="7"/>
+      <g transform="rotate(72)"><ellipse cx="0" cy="-8" rx="4.4" ry="7"/></g>
+      <g transform="rotate(144)"><ellipse cx="0" cy="-8" rx="4.4" ry="7"/></g>
+      <g transform="rotate(216)"><ellipse cx="0" cy="-8" rx="4.4" ry="7"/></g>
+      <g transform="rotate(288)"><ellipse cx="0" cy="-8" rx="4.4" ry="7"/></g>
+      <circle r="2.8" fill="currentColor" stroke="none"/>
+    </g>
+  </g>
+  <g id="leaf-divider" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+    <path d="M22 13 H92"/>
+    <path d="M138 13 H208"/>
+    <path d="M92 13 C86 10 82 12 78 7 C84 5 89 8 92 13Z" fill="currentColor" stroke="none" opacity=".85"/>
+    <path d="M92 13 C86 16 82 14 78 19 C84 21 89 18 92 13Z" fill="currentColor" stroke="none" opacity=".85"/>
+    <path d="M138 13 C144 10 148 12 152 7 C146 5 141 8 138 13Z" fill="currentColor" stroke="none" opacity=".85"/>
+    <path d="M138 13 C144 16 148 14 152 19 C146 21 141 18 138 13Z" fill="currentColor" stroke="none" opacity=".85"/>
+    <g transform="translate(115,13)" fill="var(--ground)" stroke="currentColor" stroke-width="1.2" opacity=".95">
+      <ellipse cx="0" cy="-5" rx="3.1" ry="5"/>
+      <g transform="rotate(72)"><ellipse cx="0" cy="-5" rx="3.1" ry="5"/></g>
+      <g transform="rotate(144)"><ellipse cx="0" cy="-5" rx="3.1" ry="5"/></g>
+      <g transform="rotate(216)"><ellipse cx="0" cy="-5" rx="3.1" ry="5"/></g>
+      <g transform="rotate(288)"><ellipse cx="0" cy="-5" rx="3.1" ry="5"/></g>
+      <circle r="2" fill="currentColor" stroke="none"/>
+    </g>
+  </g>
+</defs></svg>
 
 <div class="progress-bar" id="progressBar"></div>
 <canvas id="petalCanvas" aria-hidden="true"></canvas>
@@ -41,16 +180,18 @@
       </defs>
       <rect width="800" height="800" fill="url(#motif)"/>
     </svg>
+    <svg class="floral-corner tl" viewBox="0 0 170 170" aria-hidden="true"><use href="#floral-corner"/></svg>
+    <svg class="floral-corner tr" viewBox="0 0 170 170" aria-hidden="true"><use href="#floral-corner"/></svg>
     <div class="hero-content">
       <div class="hero-duo">
         <div class="hero-cluster">
           <img class="cluster-photo cluster-a" src="images/3-trim.png" alt="Gagan kneeling to propose with a rose to Vishu">
-          <img class="cluster-photo cluster-b" src="images/4-trim.png" alt="Gagan and Vishu smiling together at their floral mehendi arch">
-          <img class="cluster-photo cluster-c" src="images/5-trim.png" alt="Gagan and Vishu in a warm embrace">
+          <img class="cluster-photo cluster-b" src="images/4-trim.png" alt="Vishu and Gagan smiling together at their floral mehendi arch">
+          <img class="cluster-photo cluster-c" src="images/5-trim.png" alt="Vishu and Gagan in a warm embrace">
         </div>
       </div>
       <p class="hashtag-top">#SheDancedHeScored</p>
-      <h1 class="couple-names">Gagan <span class="amp">&amp;</span> Vishu</h1>
+      <h1 class="couple-names">Vishu <span class="amp">&amp;</span> Gagan</h1>
       <p class="date-range">4 – 7 December &nbsp;·&nbsp; 11 December 2026</p>
       <p class="locations"><span>Punjab</span><span class="dot"></span><span>Goa</span></p>
       <div class="countdown" id="countdown" aria-live="polite">
@@ -101,6 +242,9 @@
             </div>
           </div>
           <p class="venue-note">All guests stay at the resort — every function happens on the property unless noted.</p>
+          <div class="venue-map">
+            <iframe title="Map to Firangi Pani Resort" src="https://maps.google.com/maps?q=The+Firangipani+Country+Resort&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          </div>
           <a class="map-link" href="https://maps.app.goo.gl/4WE8b8ffaLZf8VpFA" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-5.3-7-11a7 7 0 0114 0c0 5.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
             View on Google Maps
@@ -109,8 +253,24 @@
         <article class="venue-card goa">
           <span class="venue-tag">11 December</span>
           <h3 class="venue-name">Mar Vista Beach House</h3>
-          <p class="venue-loc">CopelWaddo, Sernabatim, Goa 403708</p>
-          <p class="venue-note" style="margin-top:1.1rem;">A sunset send-off by the Arabian Sea — pastels, sea breeze, and one last dance floor.</p>
+          <p class="venue-loc">Copel Waddo, Sernabatim, Goa</p>
+          <div class="travel-rows">
+            <div class="travel-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 16l20-8-8 20-2-8-8-2z"/></svg>
+              <span><b>Goa Intl. Airport</b> (Dabolim) — 27 km, ~40 min by taxi</span>
+            </div>
+            <div class="travel-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 16l20-8-8 20-2-8-8-2z"/></svg>
+              <span><b>Manohar Intl. Airport</b> (Mopa) — 53 km, ~1 hr 20 min by taxi</span>
+            </div>
+            <div class="travel-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="4" width="14" height="13" rx="3"/><path d="M5 13h14M9 21l-2-4h10l-2 4M8 8h8"/></svg>
+              <span><b>Madgaon (Margao) Railway Station</b> — 8 km, ~15–20 min by taxi</span>
+            </div>
+          </div>
+          <div class="venue-map">
+            <iframe title="Map to Mar Vista Beach House" src="https://maps.google.com/maps?q=Mar+Vista+Beach+House&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          </div>
           <a class="map-link" href="https://maps.app.goo.gl/1qraVx649sPZk7Wv9" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-5.3-7-11a7 7 0 0114 0c0 5.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
             View on Google Maps
@@ -491,15 +651,19 @@
       <div class="note-photo-frame">
         <img src="images/2-trim.png" alt="Gagan and Vishu celebrating with arms raised at their floral mehendi arch, in a heart frame">
       </div>
+      <svg class="leaf-divider" viewBox="0 0 230 26" aria-hidden="true"><use href="#leaf-divider"/></svg>
       <blockquote>
         "This is not just a wedding — it is an opportunity for all of us to come together, celebrate, laugh, dance, and create unforgettable memories. A beautiful blend of Punjabi and Goan traditions awaits, and we truly hope you will be part of it."
-        <span class="cite">Gagan &amp; Vishu</span>
+        <span class="cite">Vishu &amp; Gagan</span>
       </blockquote>
     </section>
   </main>
 
   <footer class="footer">
-    <p class="footer-names">Gagan <span class="amp">&amp;</span> Vishu</p>
+    <svg class="floral-corner bl" viewBox="0 0 170 170" aria-hidden="true"><use href="#floral-corner"/></svg>
+    <svg class="floral-corner br" viewBox="0 0 170 170" aria-hidden="true"><use href="#floral-corner"/></svg>
+    <svg class="leaf-divider" viewBox="0 0 230 26" aria-hidden="true"><use href="#leaf-divider"/></svg>
+    <p class="footer-names">Vishu <span class="amp">&amp;</span> Gagan</p>
     <p>With love ❤️</p>
     <p class="footer-hash">#SheDancedHeScored</p>
   </footer>
@@ -668,7 +832,7 @@
     {day:5, y:2026,mo:12,d:11,h:17,mi:30,dur:4, title:'Goa Wedding Reception', loc:'Mar Vista Beach House, Sernabatim, Goa'}
   ];
   function buildIcs(events){
-    var lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Gagan and Vishu//Wedding//EN','CALSCALE:GREGORIAN'];
+    var lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Vishu and Gagan//Wedding//EN','CALSCALE:GREGORIAN'];
     events.forEach(function(e, i){
       var start = {y:e.y,mo:e.mo,d:e.d,h:e.h,mi:e.mi};
       var endHour = e.h + e.dur;
@@ -677,7 +841,7 @@
       lines.push('UID:gv-wedding-' + e.day + '-' + i + '@shedancedhescored');
       lines.push('DTSTART:' + fmt(start));
       lines.push('DTEND:' + fmt(end));
-      lines.push('SUMMARY:' + e.title + ' — Gagan & Vishu');
+      lines.push('SUMMARY:' + e.title + ' — Vishu & Gagan');
       lines.push('LOCATION:' + e.loc);
       lines.push('DESCRIPTION:Time shown is local (IST). See the wedding site for full details.');
       lines.push('END:VEVENT');
@@ -697,11 +861,11 @@
     btn.addEventListener('click', function(){
       var day = btn.getAttribute('data-day');
       var evs = allEvents.filter(function(e){ return String(e.day) === day; });
-      downloadIcs(buildIcs(evs), 'gagan-vishu-day' + day + '.ics');
+      downloadIcs(buildIcs(evs), 'vishu-gagan-day' + day + '.ics');
     });
   });
   document.getElementById('icsAllBtn').addEventListener('click', function(){
-    downloadIcs(buildIcs(allEvents), 'gagan-vishu-wedding-itinerary.ics');
+    downloadIcs(buildIcs(allEvents), 'vishu-gagan-wedding-itinerary.ics');
   });
 
   // petal shower
@@ -747,5 +911,6 @@
   document.getElementById('petalsBtn').addEventListener('click', spawnPetals);
 })();
 </script>
+<script src="intro.js"></script>
 </body>
 </html>
