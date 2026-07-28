@@ -151,7 +151,17 @@ html.intro-revealed #petalCanvas{opacity:1;}
 }
 .card::after{content:"";position:absolute;inset:0;background:var(--grain);opacity:.04;pointer-events:none;}
 /* rise: bring the whole card (all its text) up clear of the pocket mouth */
-.env.rise .card{transform:translateY(-236px);box-shadow:0 34px 50px -26px rgba(43,30,40,.45);}
+.env.rise .card{transform:translateY(-236px);box-shadow:0 34px 50px -26px rgba(43,30,40,.45);z-index:10;}
+
+/* When the card rises, make sure envelope decorations (frame, pocket crease,
+   wreath and shadow) stay behind the card so they don't overlap the letter */
+.env.rise .env-front,
+.env.rise::before,
+.env.rise .env-front::before,
+.env.rise .env-wreath,
+.env.rise .env-shadow{
+  z-index:1;
+}
 
 .card-floral{position:absolute;width:52px;height:52px;color:var(--iv-gold);opacity:0;
   transition:opacity 1.2s ease .35s;}
@@ -214,14 +224,18 @@ html.intro-revealed #petalCanvas{opacity:1;}
     var(--pattern),
     linear-gradient(158deg,#FBF3F5 0%,#EFDDE4 82%);
   background-size:64px 64px, auto;
-  clip-path:polygon(0 2%,50% 66%,100% 2%,100% 100%,0 100%);
+  /* Corners at the very top; mouth (60% = 181px) kept just shallower than
+     the flap's point (188px) so the flap edges OVERLAP the pocket edges —
+     no hairline seam, and the closed envelope fully hides the letter. */
+  clip-path:polygon(0 0,50% 60%,100% 0,100% 100%,0 100%);
   box-shadow:inset 0 -18px 30px -20px rgba(120,80,96,.22);
 }
 .env-front::before{ /* diagonal side-flap creases */
-  content:"";position:absolute;inset:0;
+  content:"";position:absolute;inset:0;pointer-events:none;
+  /* crease colour set to rgb(113,165,200) across the envelope */
   background:
-    linear-gradient(to bottom right, transparent 49.4%, rgba(173,148,87,.16) 49.7%, transparent 50%),
-    linear-gradient(to bottom left, transparent 49.4%, rgba(173,148,87,.16) 49.7%, transparent 50%);
+    linear-gradient(to bottom right, transparent 49.4%, rgba(113,165,200,0.16) 49.7%, transparent 50%),
+    linear-gradient(to bottom left, transparent 49.4%, rgba(113,165,200,0.16) 49.7%, transparent 50%);
 }
 .env-front::after{content:"";position:absolute;inset:0;background:var(--grain);opacity:.05;}
 .env-front .gold-edge{
@@ -231,10 +245,7 @@ html.intro-revealed #petalCanvas{opacity:1;}
 .intro.zoom .env-front{opacity:0;transition:opacity .55s ease;}
 
 /* gold foil laurel wreath, cradling the wax seal on the pocket */
-.env-wreath{
-  position:absolute;left:50%;top:150px;width:250px;height:150px;
-  transform:translateX(-50%);color:var(--iv-gold-lo);opacity:.85;z-index:1;
-}
+.env-wreath{ display:none !important; }
 .intro.zoom .env-wreath{opacity:0;transition:opacity .5s ease;}
 
 /* ---- top flap that unfolds ---- (OPAQUE, z4; covers the notch when closed)
@@ -268,13 +279,24 @@ html.intro-revealed #petalCanvas{opacity:1;}
 }
 .flap-face.out::after{content:"";position:absolute;inset:0;background:var(--grain);opacity:.05;
   clip-path:polygon(0 0,100% 0,50% 100%);}
+/* show the same diagonal crease on the flap's outer face so the crease colour
+   is continuous when the flap is closed */
+.flap-face.out::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(to bottom right, transparent 49.4%, rgba(113,165,200,0.16) 49.7%, transparent 50%),
+    linear-gradient(to bottom left, transparent 49.4%, rgba(113,165,200,0.16) 49.7%, transparent 50%);
+  clip-path:polygon(0 0,100% 0,50% 100%);}
 .flap-face.in{
   transform:rotateY(180deg);
+  /* Make the inner flap use the same pattern/gradient as the outer pocket
+     so opening the flap doesn't reveal a gold interior. */
   background:
-    radial-gradient(120% 120% at 50% 0%, #F7E7C6 0%, #E7CE97 55%, #D6B778 100%);
+    var(--pattern),
+    linear-gradient(157deg,#FBF3F5 0%,#EAD8DF 100%);
+  background-size:64px 64px, auto;
 }
 .flap-face.in .liner{
-  position:absolute;inset:0;color:var(--iv-gold-lo);opacity:.5;
+  position:absolute;inset:0;color:rgb(113,165,200);opacity:.6;
   clip-path:polygon(0 0,100% 0,50% 100%);
 }
 
