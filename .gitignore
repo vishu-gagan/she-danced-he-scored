@@ -10,3 +10,7 @@
 .claude/*.local.json
 .claude/**/*.local.json
 .claude/CLAUDE.local.md
+
+# Node Modules
+node_modules/
+

@@ -79,12 +79,31 @@
   function at(ms, fn){ timers.push(setTimeout(fn,ms)); }
 
   intro.classList.add('cam-in');                        // camera dolly begins
-  at(1700, function(){ env.classList.add('open');  });  // flap unfolds, seal lifts with it
-  at(3050, function(){ env.classList.add('rise');  });  // card emerges + illuminates
-  at(3750, function(){ env.classList.add('shimmer'); });// gold-foil sweep
-  at(5000, startZoom);                                  // push toward camera
-  at(6050, function(){ intro.classList.add('reveal'); });
-  at(6850, finish);
+
+  // Animation is triggered only when user clicks the real seal element.
+  // Remove the automatic auto-play and schedule the timeline relative to
+  // the seal click so users must click the seal to open the invitation.
+  var sealEl = document.getElementById('seal');
+  function scheduleAfter(ms, fn){ timers.push(setTimeout(fn, ms)); }
+  function startOpenSequence(){
+    if(finished) return;
+    if(!sealEl || sealEl._opened) return; // guard against repeated clicks
+    sealEl._opened = true;
+
+    // open flap immediately
+    env.classList.add('open');
+    // timings matched to original timeline (relative to open)
+    scheduleAfter(1350, function(){ env.classList.add('rise'); });
+    scheduleAfter(2050, function(){ env.classList.add('shimmer'); });
+    scheduleAfter(3300, startZoom);
+    scheduleAfter(4350, function(){ intro.classList.add('reveal'); });
+    scheduleAfter(5150, finish);
+  }
+
+  if(sealEl){
+    sealEl.style.cursor = 'pointer';
+    sealEl.addEventListener('click', function(e){ e.stopPropagation(); startOpenSequence(); });
+  }
 
   function startZoom(){
     // grow the stage from the card's on-screen centre so the invitation
@@ -115,7 +134,7 @@
     setTimeout(finish, 620);
   }
   skipBtn.addEventListener('click', function(e){ e.stopPropagation(); skip(); });
-  intro.addEventListener('click', skip);
+  intro.addEventListener('click', function(e){ if(e.target === intro) skip(); });
   document.addEventListener('keydown', function(e){
     if(e.key==='Escape'||e.key==='Enter'||e.key===' ') skip();
   });
