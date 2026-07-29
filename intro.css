@@ -264,7 +264,7 @@ html.intro-revealed #petalCanvas{opacity:1;}
   transform-style:preserve-3d;
   transition:transform 1.35s cubic-bezier(.5,.02,.2,1);
 }
-.env.open .flap-rot{transform:rotateX(174deg);} 
+.env.open .flap-rot{transform:rotateX(-174deg);} 
 
 /* When the envelope is opening, hide the pocket's static crease so it doesn't
    intersect the rotating flap crease; the flap's own crease stays visible */
@@ -277,7 +277,10 @@ html.intro-revealed #petalCanvas{opacity:1;}
     var(--pattern),
     linear-gradient(157deg,#FBF3F5 0%,#EAD8DF 100%);
   background-size:64px 64px, auto;
-  box-shadow:inset 0 6px 16px -8px rgba(120,80,96,.2);
+  box-shadow:
+    inset 0 6px 16px -8px rgba(120,80,96,.2),
+    inset 0 0 0 1px rgba(173,148,87,.55),
+    inset 0 0 0 5px rgba(173,148,87,.18);
 }
 .flap-face.out::after{content:"";position:absolute;inset:0;opacity:1;pointer-events:none;z-index:4;
   background:var(--grain);
@@ -311,7 +314,7 @@ html.intro-revealed #petalCanvas{opacity:1;}
 .seal img{width:100%;height:100%;object-fit:contain;display:block;backface-visibility:hidden;}
 
 /* flip the seal with the flap when the envelope opens */
-.env.open .seal{transform:translateZ(1px) rotateX(174deg);}
+.env.open .seal{transform:translateZ(1px) rotateX(-174deg);}
 
 @media (max-width:520px){
   .card-names{font-size:2.1rem;}
