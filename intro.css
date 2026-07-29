@@ -118,13 +118,9 @@ html.intro-revealed #petalCanvas{opacity:1;}
     inset 0 0 0 1px rgba(173,148,87,.55),
     inset 0 0 0 5px rgba(173,148,87,.18);
 }
-/* keep gold frame visible when card is revealed */
-.env.open::before{
-  z-index:11;
-}
-/* keep gold frame visible during card rise (higher specificity overrides .env.rise::before) */
+/* keep gold frame visible when card is revealed and rising (stays behind card but visible around edges) */
 .env.open.rise::before{
-  z-index:11;
+  z-index:8;
 }
 .env-shadow{
   position:absolute;left:50%;bottom:-30px;width:78%;height:46px;transform:translateX(-50%);
