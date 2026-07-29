@@ -220,19 +220,13 @@ html.intro-revealed #petalCanvas{opacity:1;}
   20%{opacity:1;}80%{opacity:1;}100%{background-position:-80% 0;opacity:0;}}
 
 /* ---- front pocket of the envelope (covers lower half; card sits BEHIND) ----
-   OPAQUE, z3. Side corners raised to the top so it interlocks with the flap
-   with no gap (closed envelope fully hides the letter). Deep mouth so the
-   risen card reads as tucked in. */
+   OPAQUE, z3. Rectangular shape so the flap can cover it completely. */
 .env-front{
   position:absolute;inset:0;z-index:3;border-radius:7px;
   background:
     var(--pattern),
     linear-gradient(158deg,#FBF3F5 0%,#EFDDE4 82%);
   background-size:64px 64px, auto;
-  /* Corners at the very top; mouth (60% = 181px) kept just shallower than
-     the flap's point (188px) so the flap edges OVERLAP the pocket edges —
-     no hairline seam, and the closed envelope fully hides the letter. */
-  clip-path:polygon(0 0,50% 60%,100% 0,100% 100%,0 100%);
   box-shadow:inset 0 -18px 30px -20px rgba(120,80,96,.22);
 }
 .env-front::before{ /* pocket shading / subtle grain — no diagonal creases here */
@@ -257,7 +251,7 @@ html.intro-revealed #petalCanvas{opacity:1;}
    The 3D fold lives inside .flap-rot. translateZ(0) isolates this subtree
    into its own compositing layer so it stays cleanly above the pocket. */
 .env-flap{
-  position:absolute;left:0;top:0;width:100%;height:188px;z-index:4;
+  position:absolute;left:0;top:0;width:100%;height:302px;z-index:4;
   perspective:1200px;transform:translateZ(0);
 }
 /* Closed, the flap (z4) covers the letter. Once it hinges open it drops
@@ -277,7 +271,6 @@ html.intro-revealed #petalCanvas{opacity:1;}
 .env.open .env-front::before{opacity:0;transition:opacity .35s ease;}
 .flap-face{
   position:absolute;inset:0;backface-visibility:hidden;
-  clip-path:polygon(0 0,100% 0,50% 100%);
 }
 .flap-face.out{
   background:
@@ -286,10 +279,10 @@ html.intro-revealed #petalCanvas{opacity:1;}
   background-size:64px 64px, auto;
   box-shadow:inset 0 6px 16px -8px rgba(120,80,96,.2);
 }
-.flap-face.out::after{content:"";position:absolute;inset:0;opacity:1;pointer-events:none;clip-path:polygon(0 0,100% 0,50% 100%);z-index:4;
-  /* draw the thin gold stroke SVG that follows only the flap edges, then the paper grain beneath it */
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><polygon points='0,0 100,0 50,70' fill='none' stroke='%23AD9457' stroke-width='1.8' stroke-linejoin='round' stroke-opacity='0.98'/></svg>"), var(--grain);
-  background-size:100% 100%, auto; background-repeat:no-repeat, repeat; background-position:0 0, 0 0; opacity:1; }
+.flap-face.out::after{content:"";position:absolute;inset:0;opacity:1;pointer-events:none;z-index:4;
+  background:var(--grain);
+  background-size:auto;
+}
 .flap-face.in{
   transform:rotateY(180deg);
   /* Make the inner flap use the same pattern/gradient as the outer pocket
@@ -301,7 +294,6 @@ html.intro-revealed #petalCanvas{opacity:1;}
 }
 .flap-face.in .liner{
   position:absolute;inset:0;color:rgba(173,148,87,0.6);
-  clip-path:polygon(0 0,100% 0,50% 100%);
 }
 
 /* ---- wax seal (real emblem, whole & intact) ----
