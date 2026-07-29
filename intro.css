@@ -306,10 +306,7 @@ html.intro-revealed #petalCanvas{opacity:1;}
   position:absolute;left:50%;top:100%;width:120px;height:120px;
   margin:-58px 0 0 -60px;z-index:5;
   filter:drop-shadow(0 8px 12px rgba(120,40,55,.35));
-  backface-visibility:hidden;transform:translateZ(1px);
-  transform-origin:50% 20%;
-  transition:transform 1.35s cubic-bezier(.5,.02,.2,1);
-  will-change:transform;
+  backface-visibility:hidden;
 }
 .seal img{width:100%;height:100%;object-fit:contain;display:block;backface-visibility:hidden;}
 
