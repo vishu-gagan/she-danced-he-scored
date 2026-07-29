@@ -11,6 +11,7 @@
   --secondary-deep:#4A6C86;
   --accent-soft:#F8D5E5;
   --accent-pop:#C42B38;
+  --botanical:#AD9457;
   --lavender:#B1A6C9;
   --on-accent:#2B3E50;
   --shadow:0 18px 40px -22px rgba(43,62,80,0.16);
@@ -31,6 +32,7 @@
     --secondary-deep:#9ACBE5;
     --accent-soft:#4A3540;
     --accent-pop:#D96670;
+    --botanical:#C9B27A;
     --lavender:#B1A6C9;
     --on-accent:#2B3E50;
     --shadow:0 18px 44px -20px rgba(0,0,0,0.35);
@@ -49,6 +51,7 @@
   --secondary-deep:#9ACBE5;
   --accent-soft:#4A3540;
   --accent-pop:#D96670;
+  --botanical:#C9B27A;
   --lavender:#B1A6C9;
   --on-accent:#2B3E50;
   --shadow:0 18px 44px -20px rgba(0,0,0,0.35);
@@ -66,6 +69,7 @@
   --secondary-deep:#4A6C86;
   --accent-soft:#F8D5E5;
   --accent-pop:#C42B38;
+  --botanical:#AD9457;
   --lavender:#B1A6C9;
   --on-accent:#2B3E50;
   --shadow:0 18px 40px -22px rgba(43,62,80,0.16);
@@ -205,6 +209,14 @@ main{max-width:880px;margin:0 auto;padding:0 1.4rem;}
 .travel-row svg{flex:0 0 auto;width:18px;height:18px;margin-top:0.1rem;color:var(--accent-pop);}
 .travel-row b{color:var(--ink);}
 .venue-note{margin-top:1.1rem;font-size:0.83rem;color:var(--ink-soft);font-style:italic;}
+.venue-map{
+  margin-top:1.2rem;border-radius:12px;overflow:hidden;
+  border:1px solid var(--surface-line);box-shadow:var(--shadow);
+  background:var(--surface-muted);
+}
+.venue-map iframe{
+  display:block;width:100%;height:180px;border:0;
+}
 .map-link{
   display:inline-flex;align-items:center;gap:0.45rem;margin-top:1.1rem;
   font-size:0.82rem;font-weight:600;letter-spacing:0.02em;color:var(--accent-pop);
@@ -361,11 +373,28 @@ blockquote .cite{display:block;font-family:var(--font-body);font-style:normal;fo
   letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin-top:1.5rem;}
 
 /* FOOTER */
-.footer{text-align:center;padding:4rem 1.4rem 3rem;}
-.footer-names{font-family:var(--font-display);font-size:2.4rem;margin-bottom:0.4rem;}
+.footer{text-align:center;padding:4rem 1.4rem 3rem;position:relative;overflow:hidden;}
+.footer-names{font-family:var(--font-display);font-size:2.4rem;margin-bottom:0.4rem;position:relative;}
 .footer-names .amp{font-style:italic;color:var(--accent-pop);}
-.footer p{color:var(--ink-soft);font-size:0.9rem;}
-.footer-hash{margin-top:0.6rem;color:var(--accent-pop);letter-spacing:0.04em;}
+.footer p{color:var(--ink-soft);font-size:0.9rem;position:relative;}
+.footer-hash{margin-top:0.6rem;color:var(--accent-pop);letter-spacing:0.04em;position:relative;}
+
+/* botanical decorations (from the invitation) */
+.floral-corner{position:absolute;width:clamp(94px,16vw,168px);height:auto;
+  color:var(--botanical);opacity:.58;pointer-events:none;z-index:1;}
+.floral-corner.tl{top:-4px;left:-4px;}
+.floral-corner.tr{top:-4px;right:-4px;transform:scaleX(-1);}
+.floral-corner.bl{bottom:-4px;left:-4px;transform:scaleY(-1);}
+.floral-corner.br{bottom:-4px;right:-4px;transform:scale(-1,-1);}
+.leaf-divider{display:block;width:min(230px,62%);height:auto;
+  margin:0.2rem auto 1.5rem;color:var(--botanical);opacity:.85;}
+.note-section .leaf-divider{margin:1.6rem auto 1.9rem;}
+:root[data-theme="dark"] .floral-corner{opacity:.44;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .floral-corner{opacity:.44;}}
+@media (max-width:640px){
+  .floral-corner{width:clamp(70px,21vw,108px);}
+  .leaf-divider{width:min(200px,72%);}
+}
 
 /* petals canvas */
 #petalCanvas{position:fixed;inset:0;pointer-events:none;z-index:300;}
