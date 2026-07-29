@@ -158,9 +158,8 @@ html.intro-revealed #petalCanvas{opacity:1;}
 /* reveal the card once the flap has begun to open (env.open) */
 .env.open .card{visibility:visible;opacity:1;}
 
-/* When the card rises, make sure envelope decorations (frame, pocket crease,
-   wreath and shadow) stay behind the card so they don't overlap the letter */
-.env.rise .env-front,
+/* When the card rises, make sure envelope decorations stay behind the card
+   but keep the front pocket border visible */
 .env.rise::before,
 .env.rise .env-front::before,
 .env.rise .env-wreath,
