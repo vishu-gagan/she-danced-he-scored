@@ -122,6 +122,10 @@ html.intro-revealed #petalCanvas{opacity:1;}
 .env.open::before{
   z-index:11;
 }
+/* keep gold frame visible during card rise (higher specificity overrides .env.rise::before) */
+.env.open.rise::before{
+  z-index:11;
+}
 .env-shadow{
   position:absolute;left:50%;bottom:-30px;width:78%;height:46px;transform:translateX(-50%);
   background:radial-gradient(ellipse at center, rgba(43,62,80,.28), transparent 70%);
