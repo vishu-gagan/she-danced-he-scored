@@ -247,11 +247,11 @@ html.intro-revealed #petalCanvas{opacity:1;}
 .env-wreath{ display:none !important; }
 .intro.zoom .env-wreath{opacity:0;transition:opacity .5s ease;}
 
-/* ---- top flap that unfolds ---- (OPAQUE, z4; covers the notch when closed)
+/* ---- top flap that unfolds ---- (OPAQUE, z4; rectangular shape, covers top half)
    The 3D fold lives inside .flap-rot. translateZ(0) isolates this subtree
    into its own compositing layer so it stays cleanly above the pocket. */
 .env-flap{
-  position:absolute;left:0;top:0;width:100%;height:302px;z-index:4;
+  position:absolute;left:0;top:0;width:100%;height:175px;z-index:4;
   perspective:1200px;transform:translateZ(0);
 }
 /* Closed, the flap (z4) covers the letter. Once it hinges open it drops
