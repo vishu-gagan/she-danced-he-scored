@@ -315,9 +315,7 @@ html.intro-revealed #petalCanvas{opacity:1;}
 
 /* hide the seal immediately when the envelope opens */
 .env.open .seal{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
+  display:none !important;
 }
 
 @media (max-width:520px){
