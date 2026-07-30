@@ -96,8 +96,9 @@
     scheduleAfter(1350, function(){ env.classList.add('rise'); });
     scheduleAfter(2050, function(){ env.classList.add('shimmer'); });
     scheduleAfter(3300, startZoom);
-    scheduleAfter(4350, function(){ intro.classList.add('reveal'); });
-    scheduleAfter(5150, finish);
+    // pause for 2 seconds after zoom completes (zoom is 2.2s, so reveal at 5500ms)
+    scheduleAfter(5500, function(){ intro.classList.add('reveal'); });
+    scheduleAfter(6350, finish);
   }
 
   if(sealEl){

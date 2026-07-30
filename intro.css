@@ -100,7 +100,7 @@ html.intro-revealed #petalCanvas{opacity:1;}
 .intro-stage{
   position:relative;perspective:1700px;perspective-origin:50% 50%;
   transform:scale(1);transform-origin:50% 55%;
-  transition:transform 1.6s cubic-bezier(.66,0,.28,1);
+  transition:transform 2.2s cubic-bezier(.66,0,.28,1);
   will-change:transform;
 }
 .intro.zoom .intro-stage{transform:scale(3.2);}
@@ -257,10 +257,9 @@ html.intro-revealed #petalCanvas{opacity:1;}
   position:absolute;left:0;top:0;width:100%;height:175px;z-index:4;
   perspective:1200px;transform:translateZ(0);
 }
-/* Closed, the flap (z4) covers the letter. Once it hinges open it drops
-   BEHIND the card (z1 < card z2), so the card comes forward in front of the
-   standing flap and its names are never occluded. */
-.env.open .env-flap{z-index:1;}
+/* Closed, the flap (z4) covers the letter. Once it hinges open it stays
+   on top so it's visible opening/standing upright. */
+.env.open .env-flap{z-index:12;}
 .intro.zoom .env-flap{opacity:0;transition:opacity .55s ease;}
 .flap-rot{
   position:absolute;inset:0;transform-origin:50% 0;transform:rotateX(0deg);
