@@ -325,4 +325,24 @@ html.intro-revealed #petalCanvas{opacity:1;}
 
 @media (max-width:520px){
   .card-names{font-size:2.1rem;}
+
+  /* Mobile intro animation fixes */
+  .intro-stage{
+    perspective:1000px !important;
+    transform-origin:50% 50% !important;
+  }
+  .intro.zoom .intro-stage{
+    transform:scale(1.8) !important;
+  }
+
+  /* Reduce camera dolly zoom on mobile */
+  .intro-camera{
+    transform:scale(.95) !important;
+  }
+
+  /* Adjust hint button for mobile */
+  .intro-hint{
+    font-size:.65rem;
+    bottom:1.5rem;
+  }
 }
