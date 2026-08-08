@@ -548,8 +548,8 @@
     </section>
 
     <section id="rsvp" class="section rsvp-section">
-      <p class="eyebrow">Kindly respond</p>
-      <h2>RSVP</h2>
+      <h2>Kindly Respond</h2>
+      <p class="eyebrow">Punjab celebration</p>
       <div class="rsvp-card">
         <p>All guests receiving this itinerary are requested to confirm their attendance at the earliest convenience (to punjab).
 Your confirmation will help us finalize:</p>
@@ -567,6 +567,7 @@ Bride and Groom. There will be no separate physical or digital invitation cards 
 We hope you will consider joining us for this special occasion.</p>
       </div>
 
+      <h3 style="margin-top:2rem;margin-bottom:1.2rem;">RSVP for Punjab</h3>
       <form class="rsvp-form" id="rsvpForm" novalidate>
         <div class="form-grid">
           <label class="form-field">
@@ -646,11 +647,78 @@ We hope you will consider joining us for this special occasion.</p>
           </label>
         </div>
 
+        <label class="form-field form-field-full">
+          <span>A note for the bride and groom</span>
+          <textarea name="noteForCouple" rows="3" placeholder="Share your wishes, favorite memories, or anything you'd like to say to Vishu & Gagan"></textarea>
+        </label>
+
         <div class="form-submit-row">
           <button type="submit" class="btn primary" id="rsvpSubmit">Send RSVP</button>
           <p class="form-status" id="rsvpStatus" role="status" aria-live="polite"></p>
         </div>
       </form>
+    </section>
+
+    <section id="rsvp-goa" class="section rsvp-section">
+      <p class="eyebrow">Goa celebration</p>
+      <div class="rsvp-card">
+        <p>If you're joining us for the sunset reception in Goa on 11 December, please confirm your attendance below.</p>
+      </div>
+
+      <h3 style="margin-top:2rem;margin-bottom:1.2rem;">RSVP for Goa</h3>
+      <form class="rsvp-form" id="rsvpGoaForm" novalidate>
+        <div class="form-grid">
+          <label class="form-field">
+            <span>Name</span>
+            <input type="text" name="name" autocomplete="name" required>
+          </label>
+          <label class="form-field">
+            <span>Contact number</span>
+            <input type="tel" name="contact" autocomplete="tel" required>
+          </label>
+        </div>
+
+        <fieldset class="form-field form-field-full radio-fieldset">
+          <legend>Will you be joining us in Goa?</legend>
+          <div class="radio-row">
+            <label class="radio-pill"><input type="radio" name="response" value="Yes" required><span>Yes</span></label>
+            <label class="radio-pill"><input type="radio" name="response" value="No"><span>No</span></label>
+          </div>
+        </fieldset>
+
+        <div class="form-grid" id="rsvpGoaGuestsField" style="display:none;">
+          <label class="form-field">
+            <span>Number of guests</span>
+            <input type="number" name="numGuests" min="1" step="1">
+          </label>
+        </div>
+
+        <label class="form-field form-field-full">
+          <span>A note for the bride and groom</span>
+          <textarea name="noteForCouple" rows="3" placeholder="Share your wishes, favorite memories, or anything you'd like to say to Vishu & Gagan"></textarea>
+        </label>
+
+        <div class="form-submit-row">
+          <button type="submit" class="btn primary" id="rsvpGoaSubmit">Send RSVP</button>
+          <p class="form-status" id="rsvpGoaStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+
+    <section class="section">
+      <p class="eyebrow">Need help?</p>
+      <h2>Contact for coordination</h2>
+      <div style="background:white;padding:2rem;border-radius:8px;box-shadow:0 2px 8px rgba(43,30,40,0.1);">
+        <p style="font-size:1.1rem;margin-bottom:0.5rem;">
+          <strong>Vidhit Kankonkar</strong>
+        </p>
+        <p style="font-size:1rem;color:#5E6B77;">
+          <a href="tel:+919923853578" style="color:#71A5C8;text-decoration:none;">+91 99238 53578</a>
+        </p>
+        <p style="font-size:0.95rem;color:#5E6B77;margin-top:1rem;">
+          For any queries, coordination, or assistance with your RSVP and travel arrangements.
+        </p>
+      </div>
     </section>
 
     <section class="section note-section" style="border-bottom:none;">
@@ -693,7 +761,7 @@ We hope you will consider joining us for this special occasion.</p>
   });
 
   // RSVP form
-  var RSVP_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbyhtM-hGW_3m74-krKft3UoYdVApVH0lGrjh3Sgc3PUCvLe5b1xYWHDQbH9p9f_6R1jzg/exec';
+  var RSVP_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycby_Q3EmX3-aSc56OrrTgLwxKPJYEctlQfGdDlPr22jNPTuTJBKj_KX4BxX4CBvWJSjNZg/exec';
   var rsvpForm = document.getElementById('rsvpForm');
   var rsvpYesFields = document.getElementById('rsvpYesFields');
   var travelNumberField = document.getElementById('travelNumberField');
@@ -718,16 +786,52 @@ We hope you will consider joining us for this special occasion.</p>
   }
   travelModeSelect.addEventListener('change', updateTravelNumberVisibility);
 
+  function validatePhoneNumber(phone){
+    // Remove all non-digit characters
+    var digitsOnly = phone.replace(/[^\d]/g, '');
+    // Check if at least 10 digits remain
+    return digitsOnly.length >= 10;
+  }
+
+  function updateFormButton(form, submitBtn){
+    // Check if all required fields are filled and valid
+    var nameInput = form.querySelector('input[name="name"]');
+    var contactInput = form.querySelector('input[name="contact"]');
+    var responseInput = form.querySelector('input[name="response"]:checked');
+
+    var isNameValid = nameInput && nameInput.value.trim().length > 0;
+    var isContactValid = contactInput && validatePhoneNumber(contactInput.value);
+    var isResponseValid = responseInput && responseInput.value;
+
+    submitBtn.disabled = !(isNameValid && isContactValid && isResponseValid);
+  }
+
+  // Set initial button state for Punjab form
+  updateFormButton(rsvpForm, rsvpSubmit);
+
+  // Update button state on any input change
+  Array.prototype.forEach.call(rsvpForm.querySelectorAll('input[name="name"], input[name="contact"], input[name="response"]'), function(input){
+    input.addEventListener('input', function(){ updateFormButton(rsvpForm, rsvpSubmit); });
+    input.addEventListener('change', function(){ updateFormButton(rsvpForm, rsvpSubmit); });
+  });
+
   rsvpForm.addEventListener('submit', function(e){
     e.preventDefault();
     if(!rsvpForm.checkValidity()){
       rsvpForm.reportValidity();
       return;
     }
+    var contactInput = rsvpForm.querySelector('input[name="contact"]');
+    if(!validatePhoneNumber(contactInput.value)){
+      alert('Please enter a valid contact number (at least 10 digits)');
+      return;
+    }
+
     var fd = new FormData(rsvpForm);
     var data = {};
     fd.forEach(function(value, key){ data[key] = value; });
     data.submittedAt = new Date().toISOString();
+    data.sheet = 'Punjab';
 
     if(RSVP_ENDPOINT_URL.indexOf('PASTE_YOUR') === 0){
       rsvpStatus.textContent = 'RSVP form is not yet connected to a sheet — see setup instructions.';
@@ -754,6 +858,90 @@ We hope you will consider joining us for this special occasion.</p>
       rsvpStatus.textContent = 'Something went wrong sending your RSVP. Please check your connection and try again.';
       rsvpStatus.className = 'form-status error';
       rsvpSubmit.disabled = false;
+    });
+  });
+
+  // Goa RSVP form
+  var rsvpGoaForm = document.getElementById('rsvpGoaForm');
+  var rsvpGoaStatus = document.getElementById('rsvpGoaStatus');
+  var rsvpGoaSubmit = document.getElementById('rsvpGoaSubmit');
+
+  // Handle Goa guests field visibility
+  var rsvpGoaGuestsField = document.getElementById('rsvpGoaGuestsField');
+  var rsvpGoaGuestsInput = rsvpGoaGuestsField.querySelector('input[name="numGuests"]');
+
+  function updateGoaGuestsFieldVisibility(){
+    var checked = rsvpGoaForm.querySelector('input[name="response"]:checked');
+    var isYes = checked && checked.value === 'Yes';
+    rsvpGoaGuestsField.style.display = isYes ? '' : 'none';
+    rsvpGoaGuestsInput.disabled = !isYes;
+    if(!isYes){
+      rsvpGoaGuestsInput.value = '';
+    }
+  }
+
+  Array.prototype.forEach.call(rsvpGoaForm.querySelectorAll('input[name="response"]'), function(radio){
+    radio.addEventListener('change', updateGoaGuestsFieldVisibility);
+  });
+
+  // Set initial button state for Goa form
+  updateFormButton(rsvpGoaForm, rsvpGoaSubmit);
+
+  // Update button state on any input change
+  Array.prototype.forEach.call(rsvpGoaForm.querySelectorAll('input[name="name"], input[name="contact"], input[name="numGuests"], input[name="response"]'), function(input){
+    input.addEventListener('input', function(){ updateFormButton(rsvpGoaForm, rsvpGoaSubmit); });
+    input.addEventListener('change', function(){ updateFormButton(rsvpGoaForm, rsvpGoaSubmit); updateGoaGuestsFieldVisibility(); });
+  });
+
+  rsvpGoaForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!rsvpGoaForm.checkValidity()){
+      rsvpGoaForm.reportValidity();
+      return;
+    }
+    var contactInput = rsvpGoaForm.querySelector('input[name="contact"]');
+    if(!validatePhoneNumber(contactInput.value)){
+      alert('Please enter a valid contact number (at least 10 digits)');
+      return;
+    }
+    var responseInput = rsvpGoaForm.querySelector('input[name="response"]:checked');
+    if(responseInput && responseInput.value === 'Yes'){
+      if(!rsvpGoaGuestsInput.value || rsvpGoaGuestsInput.value < 1){
+        alert('Please enter the number of guests');
+        return;
+      }
+    }
+
+    var fd = new FormData(rsvpGoaForm);
+    var data = {};
+    fd.forEach(function(value, key){ data[key] = value; });
+    data.submittedAt = new Date().toISOString();
+    data.sheet = 'Goa';
+
+    if(RSVP_ENDPOINT_URL.indexOf('PASTE_YOUR') === 0){
+      rsvpGoaStatus.textContent = 'RSVP form is not yet connected to a sheet — see setup instructions.';
+      rsvpGoaStatus.className = 'form-status error';
+      return;
+    }
+
+    rsvpGoaSubmit.disabled = true;
+    rsvpGoaStatus.textContent = 'Sending your RSVP…';
+    rsvpGoaStatus.className = 'form-status';
+
+    fetch(RSVP_ENDPOINT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: JSON.stringify(data)
+    }).then(function(){
+      rsvpGoaStatus.textContent = 'Thank you! Your RSVP has been received.';
+      rsvpGoaStatus.className = 'form-status success';
+      rsvpGoaForm.reset();
+      rsvpGoaSubmit.disabled = false;
+    }).catch(function(){
+      rsvpGoaStatus.textContent = 'Something went wrong sending your RSVP. Please check your connection and try again.';
+      rsvpGoaStatus.className = 'form-status error';
+      rsvpGoaSubmit.disabled = false;
     });
   });
 

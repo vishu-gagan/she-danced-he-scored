@@ -6,16 +6,21 @@
  * 1. Go to https://sheets.google.com and create a new spreadsheet
  *    (e.g. name it "Wedding RSVPs").
  *
- * 2. In row 1, add these column headers, in this exact order:
+ * 2. In that spreadsheet, create two sheets: "Punjab" and "Goa".
+ *
+ * 3. In the Punjab sheet, row 1, add these column headers:
  *    Submitted At | Name | Contact | Response | Number of Guests | Guest Names & Ages |
  *    Arrival Date | Departure Date | Mode of Travel | Flight/Train Number |
- *    Number of Nights | Food Preference | Special Requirements
+ *    Number of Nights | Food Preference | Special Requirements | Note for Couple
  *
- * 3. In that spreadsheet, go to Extensions > Apps Script.
+ * 4. In the Goa sheet, row 1, add these column headers:
+ *    Submitted At | Name | Contact | Response | Number of Guests | Note for Couple
  *
- * 4. Delete whatever starter code is there and paste in this entire file.
+ * 5. In that spreadsheet, go to Extensions > Apps Script.
  *
- * 5. Click "Deploy" > "New deployment".
+ * 6. Delete whatever starter code is there and paste in this entire file.
+ *
+ * 7. Click "Deploy" > "New deployment".
  *      - Click the gear icon next to "Select type" and choose "Web app".
  *      - Description: RSVP endpoint (or anything you like).
  *      - Execute as: Me.
@@ -23,10 +28,10 @@
  *    Click Deploy, then click "Authorize access" and approve the permissions —
  *    this script only ever touches this one spreadsheet.
  *
- * 6. Copy the "Web app URL" shown after deploying. It looks like:
+ * 8. Copy the "Web app URL" shown after deploying. It looks like:
  *    https://script.google.com/macros/s/AKfycb.../exec
  *
- * 7. Open index.html, find this line near the top of the main <script> block:
+ * 9. Open index.html, find this line near the top of the main <script> block:
  *      var RSVP_ENDPOINT_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
  *    and replace the placeholder string with the URL you just copied.
  *
@@ -45,24 +50,46 @@
  * in your spreadsheet.
  */
 function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var data = JSON.parse(e.postData.contents);
+  var sheetName = data.sheet || 'Punjab';
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = spreadsheet.getSheetByName(sheetName);
 
-  sheet.appendRow([
-    data.submittedAt || new Date().toISOString(),
-    data.name || '',
-    data.contact || '',
-    data.response || '',
-    data.numGuests || '',
-    data.guestDetails || '',
-    data.arrivalDate || '',
-    data.departureDate || '',
-    data.travelMode || '',
-    data.travelNumber || '',
-    data.numNights || '',
-    data.foodPreference || '',
-    data.specialRequirements || ''
-  ]);
+  if (!sheet) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'error', message: 'Sheet not found' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  var timestamp = data.submittedAt || new Date().toISOString();
+
+  if (sheetName === 'Punjab') {
+    sheet.appendRow([
+      timestamp,
+      data.name || '',
+      data.contact || '',
+      data.response || '',
+      data.numGuests || '',
+      data.guestDetails || '',
+      data.arrivalDate || '',
+      data.departureDate || '',
+      data.travelMode || '',
+      data.travelNumber || '',
+      data.numNights || '',
+      data.foodPreference || '',
+      data.specialRequirements || '',
+      data.noteForCouple || ''
+    ]);
+  } else if (sheetName === 'Goa') {
+    sheet.appendRow([
+      timestamp,
+      data.name || '',
+      data.contact || '',
+      data.response || '',
+      data.numGuests || '',
+      data.noteForCouple || ''
+    ]);
+  }
 
   return ContentService
     .createTextOutput(JSON.stringify({ status: 'success' }))
