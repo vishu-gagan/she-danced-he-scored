@@ -96,9 +96,9 @@
     scheduleAfter(1350, function(){ env.classList.add('rise'); });
     scheduleAfter(2050, function(){ env.classList.add('shimmer'); });
     scheduleAfter(3300, startZoom);
-    // pause for 1 second after zoom completes (zoom is 4.5s starting at 3300ms = 7800ms complete, +1s = 8800ms reveal)
-    scheduleAfter(8800, function(){ intro.classList.add('reveal'); });
-    scheduleAfter(9650, finish);
+    // no pause after zoom (zoom is 6s starting at 3300ms = 9300ms complete, reveal immediately)
+    scheduleAfter(9300, function(){ intro.classList.add('reveal'); });
+    scheduleAfter(10150, finish);
   }
 
   if(sealEl){
