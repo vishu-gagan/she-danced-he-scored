@@ -85,7 +85,6 @@ p{margin:0;}
 a{color:inherit;}
 button{font-family:var(--font-body);cursor:pointer;}
 .eyebrow{
-  margin: 10px 0px;
   text-transform:uppercase;letter-spacing:0.22em;font-size:0.72rem;font-weight:600;
   color:var(--accent-pop);
 }
@@ -250,8 +249,8 @@ main{max-width:880px;margin:0 auto;padding:0 1.4rem;}
   text-align:right;font-variant-numeric:tabular-nums;position:relative;}
 .event time::after,.event .time-label::after{content:"";position:absolute;left:84px;top:0.35rem;width:10px;height:10px;
   border-radius:50%;background:var(--ground);border:2px solid var(--accent-pop);transform:translateX(-50%);}
-.event-body{margin-top:0.6rem;}
-.event-body h3{font-size:1.15rem;margin-bottom:0.4rem;}
+.event-body{margin-top:0;}
+.event-body h3{font-size:1.15rem;margin-top:0.6rem;margin-bottom:0.4rem;}
 .event-body p.sub{color:var(--ink-soft);font-size:0.88rem;margin-top:0.4rem;}
 .event-body ul{margin:0.5rem 0 0;padding-left:1.1rem;color:var(--ink-soft);font-size:0.9rem;}
 .event-body ul li{margin-bottom:0.2rem;}
