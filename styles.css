@@ -334,7 +334,7 @@ details.dresscode-detail .dd-body{padding-top:0.5rem;line-height:1.7;}
 .rsvp-list li{font-size:0.85rem;padding:0.7rem 0.9rem;background:var(--surface-muted);border-radius:10px;border:1px solid var(--surface-line);}
 .rsvp-note{font-size:0.85rem;color:var(--ink-soft);margin-top:0.8rem;}
 
-.rsvp-section h3{margin-bottom:1.2rem;}
+.rsvp-form h3{font-size:0.9rem;font-weight:700;margin-bottom:2.5rem;letter-spacing:0.15em;}
 .rsvp-form{margin-top:1.6rem;background:var(--surface);border:1px solid var(--surface-line);
   border-radius:6px 30px 6px 30px;padding:2rem;box-shadow:var(--shadow);}
 .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1rem;}
