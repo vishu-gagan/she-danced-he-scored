@@ -80,11 +80,12 @@ html,body{margin:0;padding:0;}
 body{background:var(--ground);color:var(--ink);font-family:var(--font-body);line-height:1.6;
   -webkit-font-smoothing:antialiased;transition:background-color 0.3s ease,color 0.3s ease;}
 .page{max-width:100%;}
-h1,h2,h3{font-family:var(--font-display);font-weight:600;text-wrap:balance;margin:0;}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;text-wrap:balance;}
 p{margin:0;}
 a{color:inherit;}
 button{font-family:var(--font-body);cursor:pointer;}
 .eyebrow{
+  margin: 10px 0px;
   text-transform:uppercase;letter-spacing:0.22em;font-size:0.72rem;font-weight:600;
   color:var(--accent-pop);
 }
@@ -333,6 +334,7 @@ details.dresscode-detail .dd-body{padding-top:0.5rem;line-height:1.7;}
 .rsvp-list li{font-size:0.85rem;padding:0.7rem 0.9rem;background:var(--surface-muted);border-radius:10px;border:1px solid var(--surface-line);}
 .rsvp-note{font-size:0.85rem;color:var(--ink-soft);margin-top:0.8rem;}
 
+.rsvp-section h3{margin-bottom:1.2rem;}
 .rsvp-form{margin-top:1.6rem;background:var(--surface);border:1px solid var(--surface-line);
   border-radius:6px 30px 6px 30px;padding:2rem;box-shadow:var(--shadow);}
 .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1rem;}
