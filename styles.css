@@ -244,7 +244,7 @@ main{max-width:880px;margin:0 auto;padding:0 1.4rem;}
 .timeline{list-style:none;margin:0;padding:0;position:relative;}
 .timeline::before{content:"";position:absolute;left:84px;top:6px;bottom:6px;width:1px;
   background:linear-gradient(var(--surface-line),var(--surface-line));}
-.event{display:grid;grid-template-columns:84px 1fr;column-gap:2.3rem;padding:1.1rem 0;position:relative;}
+.event{display:grid;grid-template-columns:84px 1fr;column-gap:2.3rem;padding:1.1rem 0;position:relative;align-items:start;}
 .event time,.event .time-label{font-size:0.78rem;color:var(--ink-soft);padding-top:0.15rem;padding-right:16px;
   text-align:right;font-variant-numeric:tabular-nums;position:relative;}
 .event time::after,.event .time-label::after{content:"";position:absolute;left:84px;top:0.35rem;width:10px;height:10px;
