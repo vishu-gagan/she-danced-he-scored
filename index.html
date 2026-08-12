@@ -579,11 +579,11 @@ Your confirmation will help us finalize:</p>
           <div class="form-grid">
             <label class="form-field">
               <span>Number of guests from your family</span>
-              <input type="number" name="numGuests" min="1" step="1">
+              <input type="number" name="numGuests" min="1" step="1" required>
             </label>
             <label class="form-field">
               <span>Number of nights staying</span>
-              <input type="number" name="numNights" min="0" step="1">
+              <input type="number" name="numNights" min="0" step="1" required>
             </label>
           </div>
           <label class="form-field form-field-full">
@@ -593,11 +593,11 @@ Your confirmation will help us finalize:</p>
           <div class="form-grid">
             <label class="form-field">
               <span>Arrival date</span>
-              <input type="date" name="arrivalDate">
+              <input type="date" name="arrivalDate" required>
             </label>
             <label class="form-field">
               <span>Departure date</span>
-              <input type="date" name="departureDate">
+              <input type="date" name="departureDate" required>
             </label>
           </div>
           <div class="form-grid">
@@ -673,7 +673,7 @@ Your confirmation will help us finalize:</p>
         <div class="form-grid" id="rsvpGoaGuestsField" style="display:none;">
           <label class="form-field">
             <span>Number of guests</span>
-            <input type="number" name="numGuests" min="1" step="1">
+            <input type="number" name="numGuests" min="1" step="1" required>
           </label>
         </div>
 
@@ -783,18 +783,32 @@ Your confirmation will help us finalize:</p>
     var contactInput = form.querySelector('input[name="contact"]');
     var responseInput = form.querySelector('input[name="response"]:checked');
 
-    var isNameValid = nameInput && nameInput.value.trim().length > 0;
-    var isContactValid = contactInput && validatePhoneNumber(contactInput.value);
+    var isNameValid = nameInput && nameInput.value && nameInput.value.trim().length > 0;
+    var isContactValid = contactInput && contactInput.value && validatePhoneNumber(contactInput.value);
     var isResponseValid = responseInput && responseInput.value;
 
-    submitBtn.disabled = !(isNameValid && isContactValid && isResponseValid);
+    var isConditionalValid = true;
+    if(isResponseValid && responseInput.value === 'Yes'){
+      // Check conditional required fields
+      var numGuestsInput = form.querySelector('input[name="numGuests"]');
+      var numNightsInput = form.querySelector('input[name="numNights"]');
+      var arrivalDateInput = form.querySelector('input[name="arrivalDate"]');
+      var departureDateInput = form.querySelector('input[name="departureDate"]');
+
+      if(numGuestsInput) isConditionalValid = isConditionalValid && (numGuestsInput.value && numGuestsInput.value.length > 0);
+      if(numNightsInput) isConditionalValid = isConditionalValid && (numNightsInput.value && numNightsInput.value.length > 0);
+      if(arrivalDateInput) isConditionalValid = isConditionalValid && (arrivalDateInput.value && arrivalDateInput.value.length > 0);
+      if(departureDateInput) isConditionalValid = isConditionalValid && (departureDateInput.value && departureDateInput.value.length > 0);
+    }
+
+    submitBtn.disabled = !(isNameValid && isContactValid && isResponseValid && isConditionalValid);
   }
 
   // Set initial button state for Punjab form
   updateFormButton(rsvpForm, rsvpSubmit);
 
   // Update button state on any input change
-  Array.prototype.forEach.call(rsvpForm.querySelectorAll('input[name="name"], input[name="contact"], input[name="response"]'), function(input){
+  Array.prototype.forEach.call(rsvpForm.querySelectorAll('input[name="name"], input[name="contact"], input[name="response"], input[name="numGuests"], input[name="numNights"], input[name="arrivalDate"], input[name="departureDate"]'), function(input){
     input.addEventListener('input', function(){ updateFormButton(rsvpForm, rsvpSubmit); });
     input.addEventListener('change', function(){ updateFormButton(rsvpForm, rsvpSubmit); });
   });

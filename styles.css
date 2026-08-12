@@ -166,6 +166,7 @@ button{font-family:var(--font-body);cursor:pointer;}
 .btn:focus-visible{outline:2px solid var(--accent-pop);outline-offset:2px;}
 .btn.primary{background:var(--primary);color:var(--on-accent);border-color:var(--primary);}
 .btn.primary:hover{background:var(--primary-deep);}
+.btn.primary:disabled{background:var(--surface-muted);color:var(--ink-soft);border-color:var(--surface-line);cursor:not-allowed;opacity:0.6;}
 .scroll-cue{margin-top:2.2rem;font-size:0.78rem;color:var(--ink-soft);letter-spacing:0.08em;
   display:flex;flex-direction:column;align-items:center;gap:0.35rem;text-decoration:none;}
 .scroll-cue .chev{width:9px;height:9px;border-right:1.5px solid var(--ink-soft);border-bottom:1.5px solid var(--ink-soft);
@@ -341,6 +342,14 @@ details.dresscode-detail .dd-body{padding-top:0.5rem;line-height:1.7;}
 .form-field{display:flex;flex-direction:column;gap:0.4rem;font-size:0.82rem;color:var(--ink-soft);}
 .form-field-full{grid-column:1/-1;}
 .form-field span{font-weight:600;letter-spacing:0.02em;color:var(--ink);}
+.form-field input[required]~span::after,
+.form-field select[required]~span::after,
+.form-field textarea[required]~span::after,
+.form-field input[required]::-webkit-textfield-decoration-container::after{content:" *";color:var(--accent-pop);}
+.rsvp-yes-fields .form-field input[required]~span::after,
+.rsvp-yes-fields .form-field select[required]~span::after,
+.rsvp-yes-fields .form-field textarea[required]~span::after{content:" *";color:var(--accent-pop);}
+#rsvpGoaGuestsField .form-field input[required]~span::after{content:" *";color:var(--accent-pop);}
 .form-field input,.form-field select,.form-field textarea{
   font-family:var(--font-body);font-size:0.92rem;color:var(--ink);
   background:var(--ground);border:1px solid var(--surface-line);border-radius:10px;
