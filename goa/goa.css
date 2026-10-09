@@ -1,0 +1,4 @@
+/* Goa page. Everything else (header, sections, forms, footer, palette) comes from ../styles.css. */
+
+/* Center the Goa intro card's content vertically so it fills the card evenly */
+.card{justify-content:center;}
