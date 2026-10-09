@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Join Vishu and Gagan for Cheers & Chamak, a sunset celebration by the sea in Goa.">
+  <title>Vishu &amp; Gagan in Goa</title>
+  <script>
+    (function(){
+      var force = /[?&]intro(=|&|$)/.test(location.search);
+      var off = /[?&]nointro(=|&|$)/.test(location.search);
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(force || (!off && !reduce)) document.documentElement.classList.add('intro-playing');
+    })();
+  </script>
+  <link rel="stylesheet" href="../intro.css">
+  <link rel="stylesheet" href="goa.css">
+</head>
+<body>
+  <div class="intro" id="intro" role="dialog" aria-label="Opening the invitation">
+    <canvas class="intro-dust" id="introDust" aria-hidden="true"></canvas>
+    <div class="intro-vignette" aria-hidden="true"></div>
+    <button class="intro-skip" id="introSkip" type="button">Skip <span>&#9656;</span></button>
+    <div class="intro-camera">
+      <div class="intro-stage" id="introStage">
+        <div class="env" id="env">
+          <div class="env-shadow" aria-hidden="true"></div>
+          <div class="env-back" aria-hidden="true"></div>
+          <div class="card" id="card">
+            <svg class="card-floral tl" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><use href="#cf"/></svg>
+            <svg class="card-floral tr" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><use href="#cf"/></svg>
+            <svg class="card-floral bl" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><use href="#cf"/></svg>
+            <svg class="card-floral br" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><use href="#cf"/></svg>
+            <p class="card-mono">&#10022;</p>
+            <p class="card-eyebrow">With love, you're invited to Goa</p>
+            <h1 class="card-names">Vishu <span class="amp">&amp;</span> Gagan</h1>
+            <p class="card-date">11 December 2026</p>
+            <p class="card-loc">Sernabatim · Goa</p>
+          </div>
+          <div class="env-front" aria-hidden="true"><span class="gold-edge"></span></div>
+          <div class="env-flap" id="flap" aria-hidden="true">
+            <div class="flap-rot">
+              <div class="flap-face out"></div>
+              <div class="flap-face in"></div>
+              <div class="seal" id="seal"><img src="../images/seal-trim.png" alt=""></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="intro-hint" id="introHint">Tap Seal To Open</p>
+  </div>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <g id="cf">
+      <path d="M14 86 C22 60 40 44 70 34"/>
+      <path d="M70 34 C60 33 52 28 50 18 C60 20 68 26 70 34Z" fill="currentColor" stroke="none" opacity=".9"/>
+      <path d="M50 55 C44 52 40 46 40 38 C48 41 52 47 52 55Z" fill="currentColor" stroke="none" opacity=".85"/>
+      <path d="M34 70 C28 68 24 62 25 55 C32 58 35 64 35 70Z" fill="currentColor" stroke="none" opacity=".8"/>
+      <circle cx="76" cy="30" r="2.4" fill="currentColor" stroke="none"/>
+    </g>
+  </defs></svg>
+
+  <div class="page">
+    <header class="goa-hero" id="top">
+      <img class="hero-photo" src="../images/1-hero.jpg" alt="Vishu and Gagan celebrating together beneath a floral arch by the sea">
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="eyebrow">A sunset celebration by the sea</p>
+        <h1>Vishu <span>&amp;</span> Gagan</h1>
+        <p class="hero-title">Cheers &amp; Chamak</p>
+        <p class="hero-date">Friday, 11 December 2026 <span aria-hidden="true">·</span> Goa</p>
+        <a class="hero-link" href="#celebration">Join us by the sea <span aria-hidden="true">↓</span></a>
+      </div>
+      <p class="hero-index" aria-hidden="true">A day to celebrate, together</p>
+    </header>
+
+    <main>
+      <section class="celebration section-wrap" id="celebration" aria-labelledby="celebration-title">
+        <div class="section-kicker"><span>11 / 12 / 26</span><span>South Goa</span></div>
+        <div class="celebration-grid">
+          <div>
+            <p class="eyebrow">The Goa celebration</p>
+            <h2 id="celebration-title">Mehfil by<br>the Sea</h2>
+          </div>
+          <div class="event-details">
+            <p class="event-time">Friday <span>·</span> from 5:30 PM</p>
+            <p>Join us for a sunset evening of warm welcomes, good food, dancing and music by the water.</p>
+            <ul class="event-list">
+              <li><span>01</span>Bride's sunset entry</li>
+              <li><span>02</span>Tea, coffee &amp; snacks</li>
+              <li><span>03</span>Dance performances &amp; DJ</li>
+              <li><span>04</span>Dinner &amp; celebration</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="venue-band" aria-labelledby="venue-title">
+        <div class="venue-inner">
+          <p class="eyebrow">Meet us here</p>
+          <h2 id="venue-title">Mar Vista<br>Beach House</h2>
+          <address>Copel Waddo, Sernabatim<br>Goa 403708, India</address>
+          <a class="map-link" href="https://maps.google.com/?q=Mar+Vista+Beach+House,+Sernabatim,+Goa" target="_blank" rel="noopener noreferrer">Open in Google Maps <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="venue-art" aria-hidden="true"><span class="sun"></span><span class="horizon"></span><span class="wave wave-one"></span><span class="wave wave-two"></span><span class="wave wave-three"></span></div>
+      </section>
+
+      <section class="rsvp-section section-wrap" id="rsvp" aria-labelledby="rsvp-title">
+        <div class="rsvp-heading">
+          <p class="eyebrow">Save your place</p>
+          <h2 id="rsvp-title">Will you join<br>us in Goa?</h2>
+          <p>Please let us know if you'll be there for the evening. We can't wait to celebrate with you.</p>
+        </div>
+        <form class="rsvp-form" id="rsvpGoaForm" novalidate>
+          <div class="form-grid">
+            <label class="form-field"><span>Your name</span><input type="text" name="name" autocomplete="name" required></label>
+            <label class="form-field"><span>Contact number</span><input type="tel" name="contact" autocomplete="tel" required></label>
+          </div>
+          <fieldset class="form-field radio-fieldset">
+            <legend>Will you be joining us?</legend>
+            <div class="radio-row">
+              <label class="radio-pill"><input type="radio" name="response" value="Yes" required><span>Joyfully accepts</span></label>
+              <label class="radio-pill"><input type="radio" name="response" value="No"><span>Regretfully declines</span></label>
+            </div>
+          </fieldset>
+          <div class="form-grid guests-field" id="rsvpGoaGuestsField" hidden>
+            <label class="form-field"><span>Number of guests</span><input type="number" name="numGuests" min="1" step="1" required disabled></label>
+          </div>
+          <label class="form-field"><span>A note for Vishu &amp; Gagan <span class="optional">(optional)</span></span><textarea name="noteForCouple" rows="3" placeholder="Send the couple a little note"></textarea></label>
+          <div class="form-submit-row">
+            <button type="submit" class="submit-button" id="rsvpGoaSubmit" disabled>Send RSVP <span aria-hidden="true">→</span></button>
+            <p class="form-status" id="rsvpGoaStatus" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer"><p>With love, Vishu &amp; Gagan</p><a href="#top" aria-label="Back to top">Back to top ↑</a></footer>
+  </div>
+  <script src="../intro.js"></script>
+  <script src="goa.js"></script>
+</body>
+</html>
